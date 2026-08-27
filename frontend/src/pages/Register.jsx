@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = "http://localhost:5000";
+
 function Register({ onRegister, goToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -9,12 +11,13 @@ function Register({ onRegister, goToLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
     setError("");
 
-    // Check passwords
+    // Check password confirmation
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -22,61 +25,76 @@ function Register({ onRegister, goToLogin }) {
 
     // Check password length
     if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setError(
+        "Password must be at least 6 characters."
+      );
       return;
     }
 
     setLoading(true);
 
     try {
+
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           method: "POST",
 
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
 
           body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-          }),
+            name: name.trim(),
+            email: email.trim(),
+            password
+          })
         }
       );
 
       const data = await response.json();
 
-      // Backend returned an error
+      // Backend error
       if (!response.ok) {
-        setError(data.message || "Registration failed.");
-        setLoading(false);
+        setError(
+          data.message || "Registration failed."
+        );
         return;
       }
 
-      // Save JWT token
-      localStorage.setItem("token", data.token);
 
-      // Save user information
+      // Save JWT
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      // Save safe user information
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
+
       // Open dashboard
-      onRegister();
+      onRegister(data.user);
 
     } catch (error) {
-      console.error("Registration error:", error);
+
+      console.error(
+        "Registration error:",
+        error
+      );
 
       setError(
         "Unable to connect to the server. Make sure your backend is running."
       );
-    }
 
-    setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div className="auth-page">
@@ -104,8 +122,9 @@ function Register({ onRegister, goToLogin }) {
             </h1>
 
             <p>
-              Create your study plan, manage your tasks
-              and track your academic progress every day.
+              Create your study plan, manage your
+              tasks and track your academic progress
+              every day.
             </p>
 
           </div>
@@ -119,14 +138,16 @@ function Register({ onRegister, goToLogin }) {
 
           <div className="auth-form-container">
 
-            <h2>Create account</h2>
+            <h2>
+              Create account
+            </h2>
 
             <p className="auth-subtitle">
               Register to start using Study Planner.
             </p>
 
 
-            {/* ERROR MESSAGE */}
+            {/* ERROR */}
 
             {error && (
               <div className="auth-error">
@@ -138,8 +159,6 @@ function Register({ onRegister, goToLogin }) {
             {/* REGISTER FORM */}
 
             <form onSubmit={handleRegister}>
-
-              {/* NAME */}
 
               <label htmlFor="name">
                 Full Name
@@ -157,8 +176,6 @@ function Register({ onRegister, goToLogin }) {
               />
 
 
-              {/* EMAIL */}
-
               <label htmlFor="email">
                 Email
               </label>
@@ -174,8 +191,6 @@ function Register({ onRegister, goToLogin }) {
                 required
               />
 
-
-              {/* PASSWORD */}
 
               <label htmlFor="password">
                 Password
@@ -193,8 +208,6 @@ function Register({ onRegister, goToLogin }) {
               />
 
 
-              {/* CONFIRM PASSWORD */}
-
               <label htmlFor="confirmPassword">
                 Confirm Password
               </label>
@@ -210,8 +223,6 @@ function Register({ onRegister, goToLogin }) {
                 required
               />
 
-
-              {/* REGISTER BUTTON */}
 
               <button
                 type="submit"

@@ -1009,3 +1009,1848 @@ button {
     padding: 35px 25px;
   }
 }
+
+
+
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f5;
+  color: #555555;
+  font-size: 14px;
+}
+
+
+/* =========================
+   PAGE PLACEHOLDER
+========================= */
+
+.page-placeholder {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.page-placeholder h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.page-placeholder > p:not(.small-heading) {
+  margin: 10px 0 30px;
+  color: #777777;
+  font-size: 14px;
+}
+
+.placeholder-card {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 28px;
+  color: #777777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   NAVIGATION BUTTON
+========================= */
+
+.nav-link-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  border: none;
+  background: transparent;
+
+  color: #666666;
+
+  padding: 12px;
+
+  border-radius: 8px;
+  margin-bottom: 4px;
+
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.nav-link-button span {
+  width: 20px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.nav-link-button:hover {
+  background: #f2f2f0;
+  color: #222222;
+}
+
+
+
+/* ==================================================
+   COURSES PAGE
+================================================== */
+
+.courses-page {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   COURSES HEADER
+========================= */
+
+.courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.courses-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.courses-header p:not(.small-heading) {
+  margin: 9px 0 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+.courses-error,
+.courses-success {
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.courses-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  color: #a33a3a;
+}
+
+.courses-success {
+  background: #f1f7f1;
+  border: 1px solid #d1e4d1;
+  color: #3e7143;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.courses-loading {
+  background: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 35px;
+  text-align: center;
+  color: #777777;
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.form-card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.form-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.form-card-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-button {
+  border: none;
+  background: none;
+  font-size: 25px;
+  color: #777777;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #222222;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form-card form,
+.chapter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card label,
+.chapter-form label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #444444;
+}
+
+.form-card input,
+.form-card textarea,
+.chapter-form input,
+.chapter-form textarea {
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  padding: 11px 12px;
+  margin-bottom: 16px;
+  outline: none;
+  font-size: 13px;
+  background: #ffffff;
+  color: #222222;
+  resize: vertical;
+}
+
+.form-card input:focus,
+.form-card textarea:focus,
+.chapter-form input:focus,
+.chapter-form textarea:focus {
+  border-color: #888888;
+}
+
+
+/* =========================
+   FORM BUTTONS
+========================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.cancel-button,
+.save-button {
+  border-radius: 7px;
+  padding: 10px 16px;
+  font-size: 13px;
+  border: none;
+}
+
+.cancel-button {
+  background: #eeeeec;
+  color: #444444;
+}
+
+.save-button {
+  background: #222222;
+  color: white;
+}
+
+.cancel-button:hover {
+  background: #e2e2df;
+}
+
+.save-button:hover {
+  background: #000000;
+}
+
+
+/* =========================
+   EMPTY COURSES
+========================= */
+
+.empty-courses {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 60px 25px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #f0f0ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: #555555;
+}
+
+.empty-courses h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.empty-courses p {
+  margin: 8px auto 20px;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+/* =========================
+   SUBJECT GRID
+========================= */
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+
+/* =========================
+   SUBJECT CARD
+========================= */
+
+.subject-card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.subject-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.subject-card-top h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.subject-card-top p {
+  margin: 5px 0 0;
+  color: #999999;
+  font-size: 12px;
+}
+
+.subject-actions,
+.chapter-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.danger-text-button {
+  border: none;
+  background: none;
+  color: #a04b4b;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.danger-text-button:hover {
+  text-decoration: underline;
+}
+
+.subject-description {
+  margin: 17px 0;
+  color: #777777;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   SUBJECT PROGRESS
+========================= */
+
+.subject-progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  color: #777777;
+}
+
+.subject-progress-header strong {
+  color: #333333;
+}
+
+.subject-progress {
+  width: 100%;
+  height: 6px;
+  background: #eeeeee;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.subject-progress-fill {
+  height: 100%;
+  background: #333333;
+  border-radius: 20px;
+  transition: width 0.25s ease;
+}
+
+.chapter-count {
+  margin: 7px 0 17px;
+  color: #999999;
+  font-size: 11px;
+}
+
+
+/* =========================
+   VIEW SUBJECT
+========================= */
+
+.view-subject-button {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #eeeeee;
+  background: transparent;
+  padding: 14px 0 0;
+  display: flex;
+  justify-content: space-between;
+  color: #555555;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.view-subject-button:hover {
+  color: #111111;
+}
+
+
+/* =========================
+   CHAPTER SECTION
+========================= */
+
+.chapter-section {
+  margin-top: 18px;
+  border-top: 1px solid #eeeeee;
+  padding-top: 18px;
+}
+
+.chapter-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.chapter-section-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.add-chapter-button {
+  border: none;
+  background: none;
+  color: #444444;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.add-chapter-button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   CHAPTER FORM
+========================= */
+
+.chapter-form {
+  background: #f8f8f6;
+  border: 1px solid #e6e6e3;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.chapter-form h4 {
+  margin: 0 0 15px;
+  font-size: 14px;
+}
+
+
+/* =========================
+   CHAPTER LIST
+========================= */
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.chapter-item:last-child {
+  border-bottom: none;
+}
+
+.chapter-check {
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  background: #eeeeee;
+  color: #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chapter-item.completed .chapter-check {
+  background: #222222;
+  color: white;
+}
+
+.chapter-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chapter-info h4 {
+  margin: 3px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chapter-info p {
+  margin: 5px 0 0;
+  color: #888888;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.chapter-item.completed .chapter-info h4 {
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.no-chapters {
+  color: #999999;
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+
+/* =========================
+   RESPONSIVE COURSES
+========================= */
+
+@media (max-width: 900px) {
+
+  .subjects-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .courses-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .courses-header .add-button {
+    width: 100%;
+  }
+
+  .main-content {
+    padding: 25px 20px 45px;
+  }
+
+  .subject-card-top {
+    flex-direction: column;
+  }
+
+  .subject-actions {
+    justify-content: flex-start;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .subject-card {
+    padding: 17px;
+  }
+
+  .chapter-item {
+    flex-wrap: wrap;
+  }
+
+  .chapter-actions {
+    width: 100%;
+    margin-left: 35px;
+  }
+
+}
+
+
+/* ==================================================
+   HOME DASHBOARD DATA STATES
+================================================== */
+
+.home-data-message {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  color: #777777;
+  font-size: 13px;
+}
+
+
+.home-data-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #a33a3a;
+  font-size: 13px;
+}
+
+
+.home-empty-courses {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 35px 25px;
+  text-align: center;
+}
+
+
+.home-empty-courses h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+.home-empty-courses p {
+  margin: 8px 0 18px;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+
+
+/* ==================================================
+   SCHEDULE PAGE
+================================================== */
+
+.schedule-page {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.schedule-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.schedule-header p:not(.small-heading) {
+  margin: 9px 0 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   STATES
+========================= */
+
+.schedule-loading {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 35px;
+  text-align: center;
+  color: #777777;
+  font-size: 13px;
+}
+
+.schedule-error,
+.schedule-success {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.schedule-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  color: #a33a3a;
+}
+
+.schedule-success {
+  background: #f1f7f1;
+  border: 1px solid #d1e4d1;
+  color: #3e7143;
+}
+
+
+/* =========================
+   DATE CARD
+========================= */
+
+.schedule-date-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 25px;
+}
+
+.schedule-date-card label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444444;
+}
+
+.schedule-date-card input {
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  padding: 9px 11px;
+  outline: none;
+  font-size: 13px;
+}
+
+.schedule-date-card input:focus {
+  border-color: #888888;
+}
+
+.selected-date-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.selected-date-text span {
+  color: #999999;
+  font-size: 11px;
+}
+
+.selected-date-text strong {
+  font-size: 14px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.schedule-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.schedule-section {
+  margin-bottom: 35px;
+}
+
+.schedule-section-heading {
+  margin-bottom: 15px;
+}
+
+.schedule-section-heading h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.schedule-section-heading p {
+  margin: 5px 0 0;
+  color: #999999;
+  font-size: 12px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.schedule-empty {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 35px 25px;
+  text-align: center;
+}
+
+.schedule-empty h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.schedule-empty p {
+  margin: 8px 0 18px;
+  color: #888888;
+  font-size: 13px;
+}
+
+.schedule-empty.small {
+  padding: 25px;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+/* =========================
+   SCHEDULE LIST
+========================= */
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* =========================
+   SCHEDULE CARD
+========================= */
+
+.schedule-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.schedule-card.completed {
+  opacity: 0.7;
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+.schedule-time {
+  width: 90px;
+  flex: 0 0 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.schedule-time strong {
+  font-size: 14px;
+  color: #222222;
+}
+
+.schedule-time span {
+  font-size: 11px;
+  color: #999999;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.schedule-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.schedule-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.schedule-details h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.schedule-card.completed .schedule-details h3 {
+  text-decoration: line-through;
+  color: #888888;
+}
+
+.schedule-subject {
+  margin: 6px 0 0;
+  color: #666666;
+  font-size: 12px;
+}
+
+.schedule-description {
+  margin: 8px 0 0;
+  color: #888888;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.schedule-duration {
+  display: inline-block;
+  margin-top: 9px;
+  color: #999999;
+  font-size: 11px;
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.completed-badge {
+  border-radius: 20px;
+  background: #eeeeee;
+  padding: 4px 8px;
+  color: #555555;
+  font-size: 10px;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.schedule-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.complete-button {
+  border: 1px solid #dddddd;
+  background: #f7f7f5;
+  color: #444444;
+  border-radius: 7px;
+  padding: 8px 11px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background: #eeeeec;
+}
+
+
+/* =========================
+   UPCOMING
+========================= */
+
+.upcoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upcoming-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 9px;
+  padding: 17px 20px;
+}
+
+.upcoming-card strong {
+  font-size: 11px;
+  color: #999999;
+  font-weight: 500;
+}
+
+.upcoming-card h3 {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+.upcoming-card p {
+  margin: 4px 0 0;
+  color: #777777;
+  font-size: 11px;
+}
+
+.upcoming-card > span {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+  .schedule-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .schedule-actions {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 112px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .schedule-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .schedule-header .add-button {
+    width: 100%;
+  }
+
+  .schedule-date-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .selected-date-text {
+    align-items: flex-start;
+  }
+
+  .schedule-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-card {
+    gap: 14px;
+  }
+
+  .schedule-time {
+    width: 75px;
+    flex-basis: 75px;
+  }
+
+  .schedule-actions {
+    padding-left: 89px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .schedule-card {
+    flex-direction: column;
+  }
+
+  .schedule-time {
+    width: 100%;
+    flex-basis: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .schedule-actions {
+    padding-left: 0;
+  }
+
+}
+
+
+/* ==================================================
+   ASSIGNMENTS PAGE
+================================================== */
+
+.assignments-page {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.assignments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.assignments-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.assignments-header p:not(.small-heading) {
+  margin: 9px 0 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   STATES
+========================= */
+
+.assignment-loading {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 35px;
+  text-align: center;
+  color: #777777;
+  font-size: 13px;
+}
+
+.assignment-error,
+.assignment-success {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.assignment-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  color: #a33a3a;
+}
+
+.assignment-success {
+  background: #f1f7f1;
+  border: 1px solid #d1e4d1;
+  color: #3e7143;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.assignment-stats {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.assignment-stat {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 9px;
+  padding: 17px;
+}
+
+.assignment-stat span {
+  display: block;
+  color: #888888;
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+
+.assignment-stat strong {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.assignment-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+}
+
+
+/* =========================
+   SELECT
+========================= */
+
+.form-card select,
+.assignment-filters select {
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  padding: 11px 12px;
+  margin-bottom: 16px;
+  outline: none;
+  font-size: 13px;
+  background: #ffffff;
+  color: #222222;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.assignment-filters {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 17px;
+  margin-bottom: 20px;
+}
+
+.assignment-filters label {
+  display: block;
+  margin-bottom: 7px;
+  color: #444444;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.assignment-filters select {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.assignment-empty {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 55px 25px;
+  text-align: center;
+}
+
+.assignment-empty-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #eeeeec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555555;
+  font-size: 20px;
+}
+
+.assignment-empty h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.assignment-empty p {
+  margin: 8px 0 20px;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+/* =========================
+   LIST
+========================= */
+
+.assignment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.assignment-card {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 19px;
+}
+
+.assignment-card.completed {
+  opacity: 0.7;
+}
+
+
+/* =========================
+   CHECK
+========================= */
+
+.assignment-check {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #eeeeee;
+  color: #555555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.assignment-card.completed
+.assignment-check {
+  background: #222222;
+  color: white;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.assignment-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.assignment-title-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.assignment-details h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.assignment-card.completed
+.assignment-details h2 {
+  text-decoration: line-through;
+  color: #888888;
+}
+
+.assignment-subject {
+  margin: 6px 0 0;
+  color: #666666;
+  font-size: 12px;
+}
+
+.assignment-description {
+  margin: 7px 0 0;
+  color: #888888;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.assignment-meta {
+  margin-top: 9px;
+  color: #999999;
+  font-size: 11px;
+}
+
+
+/* =========================
+   PRIORITY BADGES
+========================= */
+
+.priority-badge {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 4px 8px;
+  font-size: 10px;
+}
+
+.priority-high {
+  background: #f5e8e8;
+  color: #9a4949;
+}
+
+.priority-medium {
+  background: #f1eee4;
+  color: #816e3f;
+}
+
+.priority-low {
+  background: #e9f0e9;
+  color: #547054;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.assignment-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .assignment-stats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .assignment-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .assignment-actions {
+    width: 100%;
+    padding-left: 45px;
+    justify-content: flex-start;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .assignments-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .assignments-header .add-button {
+    width: 100%;
+  }
+
+  .assignment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .assignment-filters {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .assignment-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .assignment-card {
+    flex-direction: column;
+  }
+
+  .assignment-check {
+    align-self: flex-start;
+  }
+
+  .assignment-actions {
+    padding-left: 0;
+  }
+
+}
+
+/* ========================================
+   DASHBOARD TODAY'S SCHEDULE STATES
+======================================== */
+
+.home-schedule-message {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+.home-schedule-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #a33a3a;
+  font-size: 13px;
+}
+
+
+.home-schedule-empty {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+
+.home-schedule-empty h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+.home-schedule-empty p {
+  margin: 7px 0 0;
+  color: #888888;
+  font-size: 12px;
+}
+
+
+/* Completed schedule */
+
+.schedule-item.completed {
+  opacity: 0.55;
+}
+
+
+.schedule-item.completed
+.schedule-info h3 {
+  text-decoration: line-through;
+}
+
+
+/* ==================================================
+   TODO LIST
+================================================== */
+
+.todo-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+.todo-header {
+  margin-bottom: 25px;
+}
+
+
+.todo-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+
+.todo-header p:not(.small-heading) {
+  margin: 9px 0 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   ADD FORM
+========================= */
+
+.todo-add-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+.todo-add-form input {
+  flex: 1;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 12px 13px;
+  outline: none;
+  font-size: 13px;
+}
+
+
+.todo-add-form input:focus {
+  border-color: #999999;
+}
+
+
+/* =========================
+   TODO LIST
+========================= */
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 9px;
+  padding: 15px 17px;
+}
+
+
+.todo-check {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border: none;
+  border-radius: 50%;
+  background: #eeeeee;
+  color: #555555;
+  cursor: pointer;
+}
+
+
+.todo-title {
+  flex: 1;
+  font-size: 13px;
+}
+
+
+.todo-item.completed
+.todo-title {
+  text-decoration: line-through;
+  color: #999999;
+}
+
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* =========================
+   EDIT
+========================= */
+
+.todo-edit-input {
+  flex: 1;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 8px 10px;
+  outline: none;
+  font-size: 13px;
+}
+
+
+/* =========================
+   EMPTY / ERROR
+========================= */
+
+.todo-empty {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 45px 25px;
+  text-align: center;
+}
+
+
+.todo-empty h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+
+.todo-empty p {
+  margin: 7px 0 0;
+  color: #888888;
+  font-size: 13px;
+}
+
+
+.todo-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  color: #a33a3a;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+
+/* =========================
+   DASHBOARD TODO STATES
+========================= */
+
+.home-todo-message {
+  text-align: center;
+  padding: 20px;
+  color: #888888;
+  font-size: 12px;
+}
+
+
+.home-todo-error {
+  background: #fff1f1;
+  border: 1px solid #f0cccc;
+  color: #a33a3a;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 11px;
+}
+
+
+.home-todo-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+
+.home-todo-empty h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+.home-todo-empty p {
+  margin: 6px 0 0;
+  color: #888888;
+  font-size: 11px;
+}
+
+
+/* Dashboard completed Todo */
+
+.priority-item.completed span {
+  text-decoration: line-through;
+  color: #999999;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+  .todo-add-form {
+    flex-direction: column;
+  }
+
+
+  .todo-add-form .add-button {
+    width: 100%;
+  }
+
+
+  .todo-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+
+  .todo-actions {
+    width: 100%;
+    padding-left: 39px;
+  }
+
+}
