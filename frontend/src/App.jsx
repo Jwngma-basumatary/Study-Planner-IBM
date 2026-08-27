@@ -128,9 +128,6 @@ function Dashboard({
       case "/exams":
         return <Exams />;
 
-      case "/goals":
-        return <Goals />;
-
       case "/settings":
         return <Settings />;
 

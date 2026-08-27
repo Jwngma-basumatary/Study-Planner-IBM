@@ -43,11 +43,7 @@ function Navbar({
       icon: "▥",
       label: "Exams"
     },
-    {
-      path: "/goals",
-      icon: "◎",
-      label: "Goals"
-    }
+    
   ];
 
 

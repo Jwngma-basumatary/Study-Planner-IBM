@@ -1,544 +1,685 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const API_URL = "http://localhost:5000";
 
-
 function ItemList() {
-
   // ========================================
-  // SCHEDULE STATE
-  // ========================================
-
-  const [schedules, setSchedules] =
-    useState([]);
-
-  const [loadingSchedules, setLoadingSchedules] =
-    useState(true);
-
-  const [scheduleError, setScheduleError] =
-    useState("");
-
-
-  // ========================================
-  // TODO STATE
+  // STATE
   // ========================================
 
-  const [todos, setTodos] =
-    useState([]);
+  const [schedules, setSchedules] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [exams, setExams] = useState([]);
 
-  const [loadingTodos, setLoadingTodos] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const [todoError, setTodoError] =
-    useState("");
+  const [calendarMonth, setCalendarMonth] = useState(
+    () => new Date()
+  );
 
+  const [now, setNow] = useState(() => new Date());
 
   // ========================================
-  // GET TODAY'S DATE
+  // AUTH / API HELPERS
   // ========================================
 
-  const getTodayDate = () => {
+  const getToken = () => localStorage.getItem("token");
 
-    const today = new Date();
+  const handleUnauthorized = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
 
-    const year =
-      today.getFullYear();
+  const apiGet = async (endpoint) => {
+    const token = getToken();
 
-    const month =
-      String(
-        today.getMonth() + 1
-      ).padStart(2, "0");
+    if (!token) {
+      throw new Error("Please log in again.");
+    }
 
-    const day =
-      String(
-        today.getDate()
-      ).padStart(2, "0");
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 401) {
+      handleUnauthorized();
+      throw new Error(
+        "Your session has expired. Please log in again."
+      );
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to load dashboard data."
+      );
+    }
+
+    return data;
+  };
+
+  const apiPatch = async (endpoint, body) => {
+    const token = getToken();
+
+    if (!token) {
+      throw new Error("Please log in again.");
+    }
+
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (response.status === 401) {
+      handleUnauthorized();
+      throw new Error(
+        "Your session has expired. Please log in again."
+      );
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to update the item."
+      );
+    }
+
+    return data;
+  };
+
+  // ========================================
+  // DATE HELPERS
+  // ========================================
+
+  const getDateKey = (date) => {
+    if (!date) return "";
+
+    if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}/.test(date)) {
+      return date.slice(0, 10);
+    }
+
+    const value = new Date(date);
+
+    if (Number.isNaN(value.getTime())) {
+      return "";
+    }
+
+    const year = value.getFullYear();
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
 
     return `${year}-${month}-${day}`;
   };
 
+  const getTodayDate = () => getDateKey(new Date());
 
-  // ========================================
-  // FORMAT TIME
-  // ========================================
+  const formatDate = (date) => {
+    if (!date) return "";
 
-  const formatTime = (
-    time
-  ) => {
+    const key = getDateKey(date);
 
-    if (!time) {
-      return "";
-    }
+    if (!key) return "";
 
+    const value = new Date(`${key}T00:00:00`);
 
-    const [
-      hour,
-      minute
-    ] = time
+    return value.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const formatDueDate = (date) => {
+    const key = getDateKey(date);
+
+    if (!key) return "";
+
+    const today = getTodayDate();
+
+    const todayValue = new Date(`${today}T00:00:00`);
+    const dueValue = new Date(`${key}T00:00:00`);
+
+    const difference = Math.round(
+      (dueValue - todayValue) / 86400000
+    );
+
+    if (difference === 0) return "Due today";
+    if (difference === 1) return "Due tomorrow";
+    if (difference === -1) return "Due yesterday";
+
+    return `Due ${formatDate(key)}`;
+  };
+
+  const formatTime = (time) => {
+    if (!time) return "";
+
+    const [hour, minute] = String(time)
       .split(":")
       .map(Number);
 
+    if (
+      Number.isNaN(hour) ||
+      Number.isNaN(minute)
+    ) {
+      return time;
+    }
 
-    const date =
-      new Date();
+    const date = new Date();
+    date.setHours(hour, minute, 0, 0);
 
-    date.setHours(
-      hour,
-      minute,
+    return date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  };
+
+  const formatDuration = (minutes) => {
+    const value = Number(minutes) || 0;
+
+    if (value <= 0) return "0 min";
+
+    const hours = Math.floor(value / 60);
+    const remainingMinutes = value % 60;
+
+    if (hours === 0) {
+      return `${remainingMinutes} min`;
+    }
+
+    if (remainingMinutes === 0) {
+      return `${hours} hr`;
+    }
+
+    return `${hours} hr ${remainingMinutes} min`;
+  };
+
+  // ========================================
+  // LOAD ALL DASHBOARD DATA
+  // ========================================
+
+  const loadDashboardData = async () => {
+    const token = getToken();
+
+    if (!token) {
+      setSchedules([]);
+      setTodos([]);
+      setAssignments([]);
+      setExams([]);
+      setLoading(false);
+      setError("Please log in to view your dashboard.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const [
+        scheduleData,
+        todoData,
+        assignmentData,
+        examData,
+      ] = await Promise.all([
+        apiGet("/api/schedules"),
+        apiGet("/api/todos"),
+        apiGet("/api/assignments"),
+        apiGet("/api/exams"),
+      ]);
+
+      setSchedules(
+        Array.isArray(scheduleData.schedules)
+          ? scheduleData.schedules
+          : Array.isArray(scheduleData)
+            ? scheduleData
+            : []
+      );
+
+      setTodos(
+        Array.isArray(todoData.todos)
+          ? todoData.todos
+          : Array.isArray(todoData)
+            ? todoData
+            : []
+      );
+
+      setAssignments(
+        Array.isArray(assignmentData.assignments)
+          ? assignmentData.assignments
+          : Array.isArray(assignmentData)
+            ? assignmentData
+            : []
+      );
+
+      setExams(
+        Array.isArray(examData.exams)
+          ? examData.exams
+          : Array.isArray(examData)
+            ? examData
+            : []
+      );
+    } catch (err) {
+      console.error("Dashboard load error:", err);
+      setError(
+        err.message || "Unable to load dashboard data."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadDashboardData();
+  }, []);
+
+  // Keep countdowns current.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(new Date());
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // ========================================
+  // TODAY'S DATA
+  // ========================================
+
+  const today = getTodayDate();
+
+  const todaySchedules = useMemo(() => {
+    return schedules
+      .filter((item) => {
+        const itemDate =
+          item.date ||
+          item.scheduledDate ||
+          item.studyDate;
+
+        return getDateKey(itemDate) === today;
+      })
+      .sort((a, b) => {
+        const first = a.startTime || "00:00";
+        const second = b.startTime || "00:00";
+
+        return first.localeCompare(second);
+      });
+  }, [schedules, today]);
+
+  const pendingTodos = useMemo(() => {
+    return todos.filter(
+      (todo) =>
+        todo.completed !== true &&
+        todo.status !== "completed" &&
+        todo.status !== "done"
+    );
+  }, [todos]);
+
+  const upcomingAssignments = useMemo(() => {
+    return assignments
+      .filter((assignment) => {
+        const completed =
+          assignment.completed === true ||
+          assignment.status === "completed" ||
+          assignment.status === "done";
+
+        return !completed;
+      })
+      .sort((a, b) => {
+        const first =
+          getDateKey(
+            a.dueDate ||
+            a.deadline ||
+            a.date
+          ) || "9999-12-31";
+
+        const second =
+          getDateKey(
+            b.dueDate ||
+            b.deadline ||
+            b.date
+          ) || "9999-12-31";
+
+        return first.localeCompare(second);
+      })
+      .slice(0, 5);
+  }, [assignments]);
+
+  const upcomingExams = useMemo(() => {
+    return exams
+      .filter((exam) => {
+        const date =
+          exam.date ||
+          exam.examDate ||
+          exam.deadline;
+
+        const time = exam.time || "00:00";
+
+        const target = new Date(
+          `${getDateKey(date)}T${time}:00`
+        );
+
+        return (
+          !Number.isNaN(target.getTime()) &&
+          target.getTime() >= now.getTime()
+        );
+      })
+      .sort((a, b) => {
+        const first = new Date(
+          `${getDateKey(
+            a.date ||
+            a.examDate ||
+            a.deadline
+          )}T${a.time || "00:00"}:00`
+        );
+
+        const second = new Date(
+          `${getDateKey(
+            b.date ||
+            b.examDate ||
+            b.deadline
+          )}T${b.time || "00:00"}:00`
+        );
+
+        return first - second;
+      });
+  }, [exams, now]);
+
+  const nextExam = upcomingExams[0] || null;
+
+  // ========================================
+  // EXAM COUNTDOWN
+  // ========================================
+
+  const examCountdown = useMemo(() => {
+    if (!nextExam) return null;
+
+    const examDate =
+      nextExam.date ||
+      nextExam.examDate ||
+      nextExam.deadline;
+
+    const examDateKey = getDateKey(examDate);
+
+    if (!examDateKey) return null;
+
+    const target = new Date(
+      `${examDateKey}T${nextExam.time || "00:00"}:00`
+    );
+
+    const difference =
+      target.getTime() - now.getTime();
+
+    if (difference <= 0) return null;
+
+    const totalMinutes = Math.floor(
+      difference / 60000
+    );
+
+    return {
+      days: Math.floor(totalMinutes / 1440),
+      hours: Math.floor(
+        (totalMinutes % 1440) / 60
+      ),
+      minutes: totalMinutes % 60,
+    };
+  }, [nextExam, now]);
+
+  // ========================================
+  // CALENDAR
+  // ========================================
+
+  const calendarData = useMemo(() => {
+    const year = calendarMonth.getFullYear();
+    const month = calendarMonth.getMonth();
+
+    const firstDay = new Date(
+      year,
+      month,
+      1
+    ).getDay();
+
+    const daysInMonth = new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+    const cells = [];
+
+    for (let i = 0; i < firstDay; i += 1) {
+      cells.push(null);
+    }
+
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      cells.push(
+        new Date(
+          year,
+          month,
+          day
+        )
+      );
+    }
+
+    return cells;
+  }, [calendarMonth]);
+
+  const eventDates = useMemo(() => {
+    const map = new Map();
+
+    const addEvent = (date, type) => {
+      const key = getDateKey(date);
+
+      if (!key) return;
+
+      if (!map.has(key)) {
+        map.set(key, new Set());
+      }
+
+      map.get(key).add(type);
+    };
+
+    schedules.forEach((item) => {
+      addEvent(
+        item.date ||
+        item.scheduledDate ||
+        item.studyDate,
+        "schedule"
+      );
+    });
+
+    assignments.forEach((assignment) => {
+      addEvent(
+        assignment.dueDate ||
+        assignment.deadline ||
+        assignment.date,
+        "assignment"
+      );
+    });
+
+    exams.forEach((exam) => {
+      addEvent(
+        exam.date ||
+        exam.examDate ||
+        exam.deadline,
+        "exam"
+      );
+    });
+
+    return map;
+  }, [schedules, assignments, exams]);
+
+  const calendarTitle = calendarMonth.toLocaleDateString(
+    "en-US",
+    {
+      month: "long",
+      year: "numeric",
+    }
+  );
+
+  const goToSchedule = (dateKey) => {
+    window.history.pushState(
+      {},
+      "",
+      `/schedule?date=${dateKey}`
+    );
+
+    window.dispatchEvent(
+      new PopStateEvent("popstate")
+    );
+  };
+
+  const goToPage = (path) => {
+    window.history.pushState(
+      {},
+      "",
+      path
+    );
+
+    window.dispatchEvent(
+      new PopStateEvent("popstate")
+    );
+  };
+
+  // ========================================
+  // TODO TOGGLE
+  // ========================================
+
+  const handleToggleTodo = async (todo) => {
+    try {
+      setError("");
+
+      const data = await apiPatch(
+        `/api/todos/${todo._id}/toggle`
+      );
+
+      const updatedTodo =
+        data.todo ||
+        data;
+
+      setTodos((currentTodos) =>
+        currentTodos.map((item) =>
+          item._id === todo._id
+            ? updatedTodo
+            : item
+        )
+      );
+    } catch (err) {
+      console.error("Todo toggle error:", err);
+
+      setError(
+        err.message ||
+        "Unable to update todo."
+      );
+    }
+  };
+
+  // ========================================
+  // STUDY ACTIVITY
+  // ========================================
+
+  const weeklyActivity = useMemo(() => {
+    const days = [];
+
+    const current = new Date();
+
+    current.setHours(
+      0,
+      0,
       0,
       0
     );
 
+    // Monday -> Sunday
+    const dayOfWeek = current.getDay();
 
-    return date.toLocaleTimeString(
-      "en-US",
-      {
-        hour: "numeric",
-        minute: "2-digit"
-      }
+    const mondayOffset =
+      dayOfWeek === 0
+        ? -6
+        : 1 - dayOfWeek;
+
+    const monday = new Date(current);
+
+    monday.setDate(
+      current.getDate() +
+      mondayOffset
     );
 
-  };
+    for (let index = 0; index < 7; index += 1) {
+      const date = new Date(monday);
 
-
-  // ========================================
-  // FORMAT DURATION
-  // ========================================
-
-  const formatDuration = (
-    minutes
-  ) => {
-
-    if (!minutes) {
-      return "0 min";
-    }
-
-
-    const hours =
-      Math.floor(
-        minutes / 60
+      date.setDate(
+        monday.getDate() +
+        index
       );
 
+      const key = getDateKey(date);
 
-    const remainingMinutes =
-      minutes % 60;
+      const minutes = schedules
+        .filter((item) => {
+          const itemDate =
+            item.date ||
+            item.scheduledDate ||
+            item.studyDate;
 
-
-    if (hours === 0) {
-
-      return `${remainingMinutes} min`;
-
-    }
-
-
-    if (remainingMinutes === 0) {
-
-      return `${hours} hr`;
-
-    }
-
-
-    return `${hours} hr ${remainingMinutes} min`;
-
-  };
-
-
-  // ========================================
-  // LOAD TODAY'S SCHEDULE
-  // ========================================
-
-  const loadTodaySchedules =
-    async () => {
-
-      const token =
-        localStorage.getItem(
-          "token"
+          return getDateKey(itemDate) === key;
+        })
+        .reduce(
+          (total, item) =>
+            total +
+            (Number(item.duration) || 0),
+          0
         );
 
-
-      // No logged-in user
-      if (!token) {
-
-        setSchedules([]);
-
-        setLoadingSchedules(false);
-
-        return;
-
-      }
-
-
-      try {
-
-        setLoadingSchedules(true);
-
-        setScheduleError("");
-
-
-        const today =
-          getTodayDate();
-
-
-        const response =
-          await fetch(
-            `${API_URL}/api/schedules?date=${today}`,
-            {
-              method: "GET",
-
-              headers: {
-                Authorization:
-                  `Bearer ${token}`
-              }
-            }
-          );
-
-
-        // ==================================
-        // SESSION EXPIRED
-        // ==================================
-
-        if (response.status === 401) {
-
-          localStorage.removeItem(
-            "token"
-          );
-
-          localStorage.removeItem(
-            "user"
-          );
-
-
-          throw new Error(
-            "Your session has expired. Please log in again."
-          );
-
-        }
-
-
-        const data =
-          await response.json();
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.message ||
-            "Unable to load today's schedule."
-          );
-
-        }
-
-
-        // ==================================
-        // STORE REAL SCHEDULES
-        // ==================================
-
-        setSchedules(
-          data.schedules || []
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Today's schedule error:",
-          error
-        );
-
-
-        setScheduleError(
-          error.message ||
-          "Unable to load today's schedule."
-        );
-
-
-      } finally {
-
-        setLoadingSchedules(false);
-
-      }
-
-    };
-
-
-  // ========================================
-  // LOAD TODOS
-  // ========================================
-
-  const loadTodos = async () => {
-
-    const token =
-      localStorage.getItem(
-        "token"
-      );
-
-
-    // No logged-in user
-    if (!token) {
-
-      setTodos([]);
-
-      setLoadingTodos(false);
-
-      return;
-
-    }
-
-
-    try {
-
-      setLoadingTodos(true);
-
-      setTodoError("");
-
-
-      const response =
-        await fetch(
-          `${API_URL}/api/todos`,
+      days.push({
+        label: date.toLocaleDateString(
+          "en-US",
           {
-            method: "GET",
-
-            headers: {
-              Authorization:
-                `Bearer ${token}`
-            }
+            weekday: "short",
           }
-        );
-
-
-      // ==================================
-      // SESSION EXPIRED
-      // ==================================
-
-      if (response.status === 401) {
-
-        localStorage.removeItem(
-          "token"
-        );
-
-        localStorage.removeItem(
-          "user"
-        );
-
-
-        throw new Error(
-          "Your session has expired. Please log in again."
-        );
-
-      }
-
-
-      const data =
-        await response.json();
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.message ||
-          "Unable to load todo list."
-        );
-
-      }
-
-
-      setTodos(
-        data.todos || []
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "Todo list error:",
-        error
-      );
-
-
-      setTodoError(
-        error.message ||
-        "Unable to load todo list."
-      );
-
-
-    } finally {
-
-      setLoadingTodos(false);
-
+        ),
+        minutes,
+        date: key,
+      });
     }
 
-  };
+    return days;
+  }, [schedules]);
 
-
-  // ========================================
-  // LOAD DASHBOARD DATA
-  // ========================================
-
-  useEffect(() => {
-
-    loadTodaySchedules();
-
-    loadTodos();
-
-  }, []);
-
-
-  // ========================================
-  // TOGGLE TODO
-  // ========================================
-
-  const handleToggleTodo =
-    async (todo) => {
-
-      const token =
-        localStorage.getItem(
-          "token"
-        );
-
-
-      if (!token) {
-
-        setTodoError(
-          "Please log in again."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        setTodoError("");
-
-
-        const response =
-          await fetch(
-            `${API_URL}/api/todos/${todo._id}/toggle`,
-            {
-              method: "PATCH",
-
-              headers: {
-                Authorization:
-                  `Bearer ${token}`
-              }
-            }
-          );
-
-
-        if (response.status === 401) {
-
-          localStorage.removeItem(
-            "token"
-          );
-
-          localStorage.removeItem(
-            "user"
-          );
-
-
-          throw new Error(
-            "Your session has expired. Please log in again."
-          );
-
-        }
-
-
-        const data =
-          await response.json();
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.message ||
-            "Unable to update todo."
-          );
-
-        }
-
-
-        setTodos(
-          (currentTodos) =>
-            currentTodos.map(
-              (item) =>
-                item._id === todo._id
-                  ? data.todo
-                  : item
-            )
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Todo toggle error:",
-          error
-        );
-
-
-        setTodoError(
-          error.message ||
-          "Unable to update todo."
-        );
-
-      }
-
-    };
-
-
-  // ========================================
-  // OPEN SCHEDULE PAGE
-  // ========================================
-
-  const openSchedulePage = () => {
-
-    window.history.pushState(
-      {},
-      "",
-      "/schedule"
+  const totalWeeklyMinutes =
+    weeklyActivity.reduce(
+      (total, day) =>
+        total + day.minutes,
+      0
     );
 
-
-    window.dispatchEvent(
-      new PopStateEvent(
-        "popstate"
-      )
+  const maxActivity =
+    Math.max(
+      ...weeklyActivity.map(
+        (day) => day.minutes
+      ),
+      1
     );
-
-  };
-
-
-  // ========================================
-  // OPEN TODO PAGE
-  // ========================================
-
-  const openTodoPage = () => {
-
-    window.history.pushState(
-      {},
-      "",
-      "/todos"
-    );
-
-
-    window.dispatchEvent(
-      new PopStateEvent(
-        "popstate"
-      )
-    );
-
-  };
-
 
   // ========================================
   // RENDER
   // ========================================
 
   return (
-
     <div className="dashboard-content">
-
+      {error && (
+        <div className="home-dashboard-error">
+          {error}
+        </div>
+      )}
 
       {/* ====================================
           TODAY'S SCHEDULE
@@ -548,102 +689,44 @@ function ItemList() {
         className="schedule-section"
         id="schedule"
       >
-
         <div className="section-heading">
-
           <div>
-
-            <h2>
-              Today's Schedule
-            </h2>
-
-            <p>
-              Your study plan for today
-            </p>
-
+            <h2>Today's Schedule</h2>
+            <p>Your study plan for today</p>
           </div>
-
 
           <button
             type="button"
             className="add-button"
-            onClick={
-              openSchedulePage
+            onClick={() =>
+              goToSchedule(today)
             }
           >
             + Add task
           </button>
-
         </div>
 
-
-        {/* ==================================
-            LOADING
-        ================================== */}
-
-        {loadingSchedules && (
-
+        {loading && (
           <div className="home-schedule-message">
-
             Loading today's schedule...
-
           </div>
-
         )}
 
+        {!loading &&
+          todaySchedules.length === 0 && (
+            <div className="home-schedule-empty">
+              <h3>No schedules for today.</h3>
+              <p>
+                Add a study session from the
+                Schedule page.
+              </p>
+            </div>
+          )}
 
-        {/* ==================================
-            ERROR
-        ================================== */}
-
-        {!loadingSchedules &&
-          scheduleError && (
-
-          <div className="home-schedule-error">
-
-            {scheduleError}
-
-          </div>
-
-        )}
-
-
-        {/* ==================================
-            EMPTY
-        ================================== */}
-
-        {!loadingSchedules &&
-          !scheduleError &&
-          schedules.length === 0 && (
-
-          <div className="home-schedule-empty">
-
-            <h3>
-              No schedules for today.
-            </h3>
-
-            <p>
-              Add a study session from the Schedule page.
-            </p>
-
-          </div>
-
-        )}
-
-
-        {/* ==================================
-            REAL TODAY'S SCHEDULES
-        ================================== */}
-
-        {!loadingSchedules &&
-          !scheduleError &&
-          schedules.length > 0 && (
-
-          <div className="schedule-card">
-
-            {schedules.map(
-              (item) => (
-
+        {!loading &&
+          todaySchedules.length > 0 && (
+            <div className="schedule-card">
+              {todaySchedules.map((item) => (
                 <div
                   className={
                     item.completed
@@ -652,82 +735,44 @@ function ItemList() {
                   }
                   key={item._id}
                 >
-
-
-                  {/* TIME */}
-
                   <div className="time">
-
                     {formatTime(
                       item.startTime
                     )}
-
                   </div>
-
-
-                  {/* TIMELINE */}
 
                   <div className="schedule-line">
-
                     <div className="timeline-dot"></div>
-
                   </div>
 
-
-                  {/* SCHEDULE INFORMATION */}
-
                   <div className="schedule-info">
-
                     <h3>
-
                       {item.topic ||
                         item.title ||
                         "Study Session"}
-
                     </h3>
 
-
                     <p>
-
-                      {item.subject}
-
-                      {item.topic &&
-                        ` • ${item.topic}`}
-
+                      {item.subject || "Study"}
                     </p>
-
                   </div>
 
-
-                  {/* DURATION */}
-
                   <span className="duration">
-
                     {formatDuration(
                       item.duration
                     )}
-
                   </span>
-
                 </div>
-
-              )
-            )}
-
-          </div>
-
-        )}
-
+              ))}
+            </div>
+          )}
       </section>
 
-
       {/* ====================================
-          REST OF DASHBOARD
+          MAIN GRID
       ==================================== */}
 
       <div className="main-grid">
-
-
         {/* ==================================
             UPCOMING ASSIGNMENTS
         ================================== */}
@@ -736,112 +781,77 @@ function ItemList() {
           className="dashboard-card"
           id="assignments"
         >
-
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                Upcoming Assignments
-              </h2>
-
-              <p>
-                Don't miss your deadlines
-              </p>
-
+              <h2>Upcoming Assignments</h2>
+              <p>Don't miss your deadlines</p>
             </div>
-
 
             <button
               type="button"
               className="text-button"
+              onClick={() =>
+                goToPage("/assignments")
+              }
             >
               View all
             </button>
-
           </div>
-
 
           <div className="assignment-list">
-
-            <div className="assignment-item">
-
-              <div className="assignment-icon">
-                ✓
+            {loading && (
+              <div className="home-dashboard-message">
+                Loading assignments...
               </div>
+            )}
 
-              <div className="assignment-info">
+            {!loading &&
+              upcomingAssignments.length === 0 && (
+                <div className="home-dashboard-message">
+                  No pending assignments.
+                </div>
+              )}
 
-                <h3>
-                  React Dashboard
-                </h3>
+            {!loading &&
+              upcomingAssignments.map(
+                (assignment) => {
+                  const dueDate =
+                    assignment.dueDate ||
+                    assignment.deadline ||
+                    assignment.date;
 
-                <p>
-                  Web Development
-                </p>
+                  return (
+                    <div
+                      className="assignment-item"
+                      key={assignment._id}
+                    >
+                      <div className="assignment-icon">
+                        ✓
+                      </div>
 
-              </div>
+                      <div className="assignment-info">
+                        <h3>
+                          {assignment.title ||
+                            assignment.name ||
+                            "Assignment"}
+                        </h3>
 
-              <span className="due-date">
-                Due tomorrow
-              </span>
+                        <p>
+                          {assignment.subject ||
+                            assignment.course ||
+                            "Study"}
+                        </p>
+                      </div>
 
-            </div>
-
-
-            <div className="assignment-item">
-
-              <div className="assignment-icon">
-                ✓
-              </div>
-
-              <div className="assignment-info">
-
-                <h3>
-                  SQL Practice
-                </h3>
-
-                <p>
-                  Database Systems
-                </p>
-
-              </div>
-
-              <span className="due-date">
-                Due Aug 29
-              </span>
-
-            </div>
-
-
-            <div className="assignment-item">
-
-              <div className="assignment-icon">
-                ✓
-              </div>
-
-              <div className="assignment-info">
-
-                <h3>
-                  Tree Implementation
-                </h3>
-
-                <p>
-                  Data Structures
-                </p>
-
-              </div>
-
-              <span className="due-date">
-                Due Sep 01
-              </span>
-
-            </div>
-
+                      <span className="due-date">
+                        {formatDueDate(dueDate)}
+                      </span>
+                    </div>
+                  );
+                }
+              )}
           </div>
-
         </section>
-
 
         {/* ==================================
             TOP PRIORITIES
@@ -849,126 +859,108 @@ function ItemList() {
 
         <section
           className="dashboard-card"
-          id="goals"
+          id="priorities"
         >
-
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                Top Priorities
-              </h2>
-
-              <p>
-                Focus on these tasks
-              </p>
-
+              <h2>Top Priorities</h2>
+              <p>Focus on these tasks</p>
             </div>
-
           </div>
-
 
           <div className="priority-list">
+            {loading && (
+              <div className="home-dashboard-message">
+                Loading priorities...
+              </div>
+            )}
 
-            <label className="priority-item">
+            {!loading &&
+              pendingTodos.length === 0 && (
+                <div className="home-dashboard-message">
+                  You have no pending priorities.
+                </div>
+              )}
 
-              <input
-                type="checkbox"
-              />
+            {!loading &&
+              pendingTodos
+                .slice(0, 5)
+                .map((todo) => (
+                  <label
+                    className="priority-item"
+                    key={todo._id}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={
+                        todo.completed === true
+                      }
+                      onChange={() =>
+                        handleToggleTodo(todo)
+                      }
+                    />
 
-              <span>
-                Complete React dashboard
-              </span>
-
-            </label>
-
-
-            <label className="priority-item">
-
-              <input
-                type="checkbox"
-              />
-
-              <span>
-                Revise binary trees
-              </span>
-
-            </label>
-
-
-            <label className="priority-item">
-
-              <input
-                type="checkbox"
-              />
-
-              <span>
-                Practice SQL queries
-              </span>
-
-            </label>
-
-
-            <label className="priority-item">
-
-              <input
-                type="checkbox"
-              />
-
-              <span>
-                Prepare for upcoming exam
-              </span>
-
-            </label>
-
+                    <span>
+                      {todo.title ||
+                        todo.text ||
+                        todo.name ||
+                        "Todo"}
+                    </span>
+                  </label>
+                ))}
           </div>
-
         </section>
-
 
         {/* ==================================
             CALENDAR
         ================================== */}
 
-        <section
-          className="dashboard-card calendar-card"
-        >
-
+        <section className="dashboard-card calendar-card">
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                August 2026
-              </h2>
-
-              <p>
-                Your study calendar
-              </p>
-
+              <h2>{calendarTitle}</h2>
+              <p>Your study calendar</p>
             </div>
 
-
             <div className="calendar-arrows">
-
-              <button type="button">
+              <button
+                type="button"
+                aria-label="Previous month"
+                onClick={() =>
+                  setCalendarMonth(
+                    (date) =>
+                      new Date(
+                        date.getFullYear(),
+                        date.getMonth() - 1,
+                        1
+                      )
+                  )
+                }
+              >
                 ‹
               </button>
 
-              <button type="button">
+              <button
+                type="button"
+                aria-label="Next month"
+                onClick={() =>
+                  setCalendarMonth(
+                    (date) =>
+                      new Date(
+                        date.getFullYear(),
+                        date.getMonth() + 1,
+                        1
+                      )
+                  )
+                }
+              >
                 ›
               </button>
-
             </div>
-
           </div>
 
-
           <div className="calendar">
-
             <div className="calendar-header">
-
               <span>Sun</span>
               <span>Mon</span>
               <span>Tue</span>
@@ -976,50 +968,80 @@ function ItemList() {
               <span>Thu</span>
               <span>Fri</span>
               <span>Sat</span>
-
             </div>
-
 
             <div className="calendar-days">
+              {calendarData.map(
+                (date, index) => {
+                  if (!date) {
+                    return (
+                      <span
+                        className="empty"
+                        key={`empty-${index}`}
+                      />
+                    );
+                  }
 
-              <span className="empty"></span>
-              <span className="empty"></span>
-              <span className="empty"></span>
+                  const key =
+                    getDateKey(date);
 
+                  const events =
+                    eventDates.get(key);
 
-              {Array.from(
-                {
-                  length: 31
-                },
-                (_, index) =>
-                  index + 1
-              ).map(
-                (day) => (
+                  const isToday =
+                    key === today;
 
-                  <span
-                    key={day}
-                    className={
-                      day === 26
-                        ? "today"
-                        : [27, 29, 31].includes(
-                            day
-                          )
-                        ? "has-task"
-                        : ""
-                    }
-                  >
-                    {day}
-                  </span>
+                  const hasTask =
+                    events &&
+                    events.size > 0;
 
-                )
+                  return (
+                    <button
+                      type="button"
+                      key={key}
+                      className={[
+                        "calendar-day",
+                        isToday
+                          ? "today"
+                          : "",
+                        hasTask
+                          ? "has-task"
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      onClick={() =>
+                        goToSchedule(key)
+                      }
+                      title={
+                        hasTask
+                          ? Array.from(
+                              events
+                            ).join(", ")
+                          : "Open schedule"
+                      }
+                    >
+                      {date.getDate()}
+
+                      {hasTask && (
+                        <span className="calendar-dot">
+                          •
+                        </span>
+                      )}
+                    </button>
+                  );
+                }
               )}
-
             </div>
-
           </div>
 
+          <div className="calendar-legend">
+            <span>
+              <i className="calendar-legend-dot" />
+              Study activity
+            </span>
+          </div>
         </section>
-
 
         {/* ==================================
             TODO LIST
@@ -1029,143 +1051,75 @@ function ItemList() {
           className="dashboard-card"
           id="todos"
         >
-
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                Todo List
-              </h2>
-
-              <p>
-                Things you need to get done
-              </p>
-
+              <h2>Todo List</h2>
+              <p>Things you need to get done</p>
             </div>
-
 
             <button
               type="button"
               className="text-button"
-              onClick={
-                openTodoPage
+              onClick={() =>
+                goToPage("/todos")
               }
             >
               View all
             </button>
-
           </div>
 
+          <div className="priority-list">
+            {loading && (
+              <div className="home-todo-message">
+                Loading todo list...
+              </div>
+            )}
 
-          {/* ==================================
-              LOADING
-          ================================== */}
+            {!loading &&
+              pendingTodos.length === 0 && (
+                <div className="home-todo-empty">
+                  <h3>
+                    Your todo list is empty.
+                  </h3>
+                  <p>
+                    Add something you need
+                    to accomplish.
+                  </p>
+                </div>
+              )}
 
-          {loadingTodos && (
-
-            <div className="home-todo-message">
-
-              Loading todo list...
-
-            </div>
-
-          )}
-
-
-          {/* ==================================
-              ERROR
-          ================================== */}
-
-          {!loadingTodos &&
-            todoError && (
-
-            <div className="home-todo-error">
-
-              {todoError}
-
-            </div>
-
-          )}
-
-
-          {/* ==================================
-              EMPTY
-          ================================== */}
-
-          {!loadingTodos &&
-            !todoError &&
-            todos.length === 0 && (
-
-            <div className="home-todo-empty">
-
-              <h3>
-                Your todo list is empty.
-              </h3>
-
-              <p>
-                Add something you need to accomplish.
-              </p>
-
-            </div>
-
-          )}
-
-
-          {/* ==================================
-              REAL TODOS
-          ================================== */}
-
-          {!loadingTodos &&
-            !todoError &&
-            todos.length > 0 && (
-
-            <div className="priority-list">
-
-              {todos
+            {!loading &&
+              pendingTodos
                 .slice(0, 5)
-                .map(
-                  (todo) => (
-
-                    <label
-                      className={
-                        todo.completed
-                          ? "priority-item completed"
-                          : "priority-item"
+                .map((todo) => (
+                  <label
+                    className={
+                      todo.completed
+                        ? "priority-item completed"
+                        : "priority-item"
+                    }
+                    key={todo._id}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={
+                        todo.completed === true
                       }
-                      key={
-                        todo._id
+                      onChange={() =>
+                        handleToggleTodo(todo)
                       }
-                    >
+                    />
 
-                      <input
-                        type="checkbox"
-                        checked={
-                          todo.completed
-                        }
-                        onChange={() =>
-                          handleToggleTodo(
-                            todo
-                          )
-                        }
-                      />
-
-
-                      <span>
-                        {todo.title}
-                      </span>
-
-                    </label>
-
-                  )
-                )}
-
-            </div>
-
-          )}
-
+                    <span>
+                      {todo.title ||
+                        todo.text ||
+                        todo.name ||
+                        "Todo"}
+                    </span>
+                  </label>
+                ))}
+          </div>
         </section>
-
 
         {/* ==================================
             EXAM COUNTDOWN
@@ -1175,81 +1129,117 @@ function ItemList() {
           className="dashboard-card exam-card"
           id="exams"
         >
-
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                Exam Countdown
-              </h2>
+              <h2>Exam Countdown</h2>
 
               <p>
-                Data Structures Final Exam
+                {nextExam
+                  ? nextExam.title ||
+                    nextExam.name ||
+                    "Upcoming Exam"
+                  : "No upcoming exams"}
               </p>
-
             </div>
-
 
             <span className="exam-icon">
               !
             </span>
-
           </div>
 
-
-          <div className="countdown">
-
-            <div>
-
-              <strong>
-                12
-              </strong>
-
-              <span>
-                Days
-              </span>
-
+          {loading && (
+            <div className="home-dashboard-message">
+              Loading exams...
             </div>
+          )}
 
+          {!loading && !nextExam && (
+            <div className="home-dashboard-message">
+              <p>
+                You have no upcoming exams.
+              </p>
 
-            <div>
-
-              <strong>
-                08
-              </strong>
-
-              <span>
-                Hours
-              </span>
-
+              <button
+                type="button"
+                className="text-button"
+                onClick={() =>
+                  goToPage("/exams")
+                }
+              >
+                Add an exam
+              </button>
             </div>
+          )}
 
+          {!loading &&
+            nextExam &&
+            examCountdown && (
+              <>
+                <div className="exam-next-info">
+                  <strong>
+                    {nextExam.subject ||
+                      "Exam"}
+                  </strong>
 
-            <div>
+                  <span>
+                    {formatDate(
+                      nextExam.date ||
+                        nextExam.examDate ||
+                        nextExam.deadline
+                    )}
 
-              <strong>
-                34
-              </strong>
+                    {nextExam.time
+                      ? ` • ${formatTime(
+                          nextExam.time
+                        )}`
+                      : ""}
+                  </span>
+                </div>
 
-              <span>
-                Minutes
-              </span>
+                <div className="countdown">
+                  <div>
+                    <strong>
+                      {String(
+                        examCountdown.days
+                      ).padStart(2, "0")}
+                    </strong>
 
-            </div>
+                    <span>Days</span>
+                  </div>
 
-          </div>
+                  <div>
+                    <strong>
+                      {String(
+                        examCountdown.hours
+                      ).padStart(2, "0")}
+                    </strong>
 
+                    <span>Hours</span>
+                  </div>
 
-          <button
-            type="button"
-            className="study-button"
-          >
-            Start studying
-          </button>
+                  <div>
+                    <strong>
+                      {String(
+                        examCountdown.minutes
+                      ).padStart(2, "0")}
+                    </strong>
 
+                    <span>Minutes</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="study-button"
+                  onClick={() =>
+                    goToPage("/exams")
+                  }
+                >
+                  View exam
+                </button>
+              </>
+            )}
         </section>
-
 
         {/* ==================================
             ACTIVITY
@@ -1258,125 +1248,57 @@ function ItemList() {
         <section
           className="dashboard-card activity-card"
         >
-
           <div className="section-heading">
-
             <div>
-
-              <h2>
-                Study Activity
-              </h2>
-
-              <p>
-                Your activity this week
-              </p>
-
+              <h2>Study Activity</h2>
+              <p>Your activity this week</p>
             </div>
-
 
             <span className="activity-number">
-              18.5 hrs
+              {formatDuration(
+                totalWeeklyMinutes
+              )}
             </span>
-
           </div>
-
 
           <div className="activity-chart">
+            {weeklyActivity.map((day) => {
+              const height =
+                day.minutes === 0
+                  ? 0
+                  : Math.max(
+                      8,
+                      Math.round(
+                        (day.minutes /
+                          maxActivity) *
+                          100
+                      )
+                    );
 
-            <div
-              className="bar"
-              style={{
-                height: "40%"
-              }}
-            >
-              <span>
-                Mon
-              </span>
-            </div>
+              return (
+                <div
+                  className="bar"
+                  key={day.date}
+                  title={`${day.label}: ${formatDuration(
+                    day.minutes
+                  )}`}
+                >
+                  <div
+                    className="activity-bar-fill"
+                    style={{
+                      height: `${height}%`,
+                    }}
+                  />
 
-
-            <div
-              className="bar"
-              style={{
-                height: "65%"
-              }}
-            >
-              <span>
-                Tue
-              </span>
-            </div>
-
-
-            <div
-              className="bar"
-              style={{
-                height: "50%"
-              }}
-            >
-              <span>
-                Wed
-              </span>
-            </div>
-
-
-            <div
-              className="bar"
-              style={{
-                height: "80%"
-              }}
-            >
-              <span>
-                Thu
-              </span>
-            </div>
-
-
-            <div
-              className="bar"
-              style={{
-                height: "60%"
-              }}
-            >
-              <span>
-                Fri
-              </span>
-            </div>
-
-
-            <div
-              className="bar"
-              style={{
-                height: "90%"
-              }}
-            >
-              <span>
-                Sat
-              </span>
-            </div>
-
-
-            <div
-              className="bar"
-              style={{
-                height: "35%"
-              }}
-            >
-              <span>
-                Sun
-              </span>
-            </div>
-
+                  <span>{day.label}</span>
+                </div>
+              );
+            })}
           </div>
-
         </section>
-
       </div>
-
     </div>
-
   );
-
 }
-
 
 export default ItemList;

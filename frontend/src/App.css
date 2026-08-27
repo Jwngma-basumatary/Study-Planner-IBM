@@ -2854,3 +2854,809 @@ button {
   }
 
 }
+
+
+/* =========================================================
+   EXAMS PAGE
+   Clean UI matching Assignments / Schedule
+========================================================= */
+
+.exams-page {
+  width: 100%;
+  max-width: 1145px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.exams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 28px;
+}
+
+.exams-header .small-heading {
+  margin: 0 0 8px;
+  color: #8a8a8a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.exams-header h1 {
+  margin: 0;
+  color: #171717;
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -1.4px;
+}
+
+.exams-header > div > p:last-child {
+  margin: 9px 0 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.exams-header .add-button,
+.exam-empty .add-button {
+  min-height: 40px;
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #222;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.exams-header .add-button:hover,
+.exam-empty .add-button:hover {
+  background: #111;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.exam-error,
+.exam-success {
+  margin-bottom: 18px;
+  padding: 13px 16px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.exam-error {
+  border: 1px solid #edd0d0;
+  background: #fff5f5;
+  color: #a13c3c;
+}
+
+.exam-success {
+  border: 1px solid #d4e4d4;
+  background: #f4faf4;
+  color: #477247;
+}
+
+
+/* =========================================================
+   NEXT EXAM
+========================================================= */
+
+.exam-countdown-card {
+  min-height: 150px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 30px;
+
+  margin-bottom: 20px;
+  padding: 25px 27px;
+
+  background: #fff;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+}
+
+.exam-countdown-card .small-heading {
+  margin: 0 0 7px;
+
+  color: #888;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.exam-countdown-card h2 {
+  margin: 0;
+
+  color: #202020;
+
+  font-size: 24px;
+  line-height: 1.2;
+
+  font-weight: 600;
+}
+
+.exam-countdown-card p:last-child {
+  margin: 9px 0 0;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.exam-countdown {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.exam-countdown > div {
+  width: 78px;
+  height: 78px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #f7f7f5;
+
+  border: 1px solid #e7e7e5;
+  border-radius: 8px;
+}
+
+.exam-countdown strong {
+  color: #222;
+
+  font-size: 27px;
+  line-height: 1;
+
+  font-weight: 500;
+}
+
+.exam-countdown span {
+  margin-top: 7px;
+
+  color: #888;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.exam-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.exam-stat {
+  min-height: 91px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 17px 20px;
+
+  background: #fff;
+
+  border: 1px solid #e1e1e1;
+  border-radius: 9px;
+}
+
+.exam-stat span {
+  margin-bottom: 8px;
+
+  color: #888;
+
+  font-size: 12px;
+}
+
+.exam-stat strong {
+  color: #222;
+
+  font-size: 25px;
+  line-height: 1;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   EXAM LIST
+========================================================= */
+
+.exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* =========================================================
+   EXAM CARD
+========================================================= */
+
+.exam-item {
+  min-height: 108px;
+
+  display: grid;
+
+  grid-template-columns:
+    64px minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 18px 21px;
+
+  background: #fff;
+
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.exam-item:hover {
+  border-color: #d4d4d4;
+
+  box-shadow:
+    0 3px 12px rgba(
+      0,
+      0,
+      0,
+      0.035
+    );
+}
+
+.exam-item.past {
+  opacity: 0.6;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.exam-date-box {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #f7f7f5;
+
+  border: 1px solid #e4e4e2;
+  border-radius: 8px;
+}
+
+.exam-date-box strong {
+  color: #222;
+
+  font-size: 21px;
+  line-height: 1;
+
+  font-weight: 600;
+}
+
+.exam-date-box span {
+  margin-top: 5px;
+
+  color: #888;
+
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.exam-details {
+  min-width: 0;
+}
+
+.exam-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.exam-details h2 {
+  margin: 0;
+
+  color: #202020;
+
+  font-size: 16px;
+  line-height: 1.3;
+
+  font-weight: 600;
+}
+
+.exam-details p {
+  margin: 6px 0 0;
+
+  color: #777;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.exam-details small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #999;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.exam-status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 21px;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 500;
+}
+
+.status-not-started {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.status-in-progress {
+  background: #f5f0e4;
+  color: #806b3e;
+}
+
+.status-ready {
+  background: #e9f2e9;
+  color: #557255;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.exam-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  flex-shrink: 0;
+}
+
+.exam-actions select {
+  width: 112px;
+  height: 34px;
+
+  padding: 0 8px;
+
+  border: 1px solid #ddd;
+  border-radius: 7px;
+
+  background: #fff;
+  color: #444;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  outline: none;
+}
+
+.exam-actions select:focus {
+  border-color: #999;
+}
+
+.exam-actions button {
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.text-button {
+  padding: 5px 2px;
+
+  border: 0;
+  background: transparent;
+
+  color: #333;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+.danger-text-button {
+  padding: 5px 2px;
+
+  border: 0;
+  background: transparent;
+
+  color: #b04444;
+}
+
+.danger-text-button:hover {
+  color: #8e2929;
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.exam-form-card {
+  margin-bottom: 20px;
+
+  padding: 24px;
+
+  background: #fff;
+
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+.form-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.form-card-header h2 {
+  margin: 0;
+
+  color: #222;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-button {
+  width: 32px;
+  height: 32px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: #f3f3f1;
+
+  color: #555;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: #e9e9e7;
+}
+
+.exam-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 17px 18px;
+
+  margin-bottom: 17px;
+}
+
+.exam-form-card label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #444;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.exam-form-card input,
+.exam-form-card select,
+.exam-form-card textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 7px;
+
+  background: #fff;
+
+  color: #222;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  outline: none;
+}
+
+.exam-form-card input,
+.exam-form-card select {
+  height: 42px;
+}
+
+.exam-form-card textarea {
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+.exam-form-card input:focus,
+.exam-form-card select:focus,
+.exam-form-card textarea:focus {
+  border-color: #999;
+}
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.cancel-button,
+.save-button {
+  min-height: 38px;
+
+  padding: 0 17px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.cancel-button {
+  border: 1px solid #ddd;
+
+  background: #fff;
+
+  color: #555;
+}
+
+.cancel-button:hover {
+  background: #f7f7f5;
+}
+
+.save-button {
+  border: 1px solid #222;
+
+  background: #222;
+
+  color: #fff;
+}
+
+.save-button:hover {
+  background: #111;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.exam-empty,
+.exam-loading {
+  padding: 55px 30px;
+
+  background: #fff;
+
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.exam-loading {
+  color: #888;
+
+  font-size: 13px;
+}
+
+.exam-empty h2 {
+  margin: 0 0 8px;
+
+  color: #333;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.exam-empty p {
+  max-width: 430px;
+
+  margin: 0 auto 20px;
+
+  color: #888;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .exam-item {
+    grid-template-columns:
+      58px minmax(0, 1fr);
+  }
+
+  .exam-actions {
+    grid-column: 1 / -1;
+
+    justify-content: flex-start;
+
+    padding-left: 78px;
+  }
+}
+
+
+@media (max-width: 750px) {
+  .exams-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .exam-countdown-card {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .exam-countdown {
+    width: 100%;
+  }
+
+  .exam-countdown > div {
+    flex: 1;
+  }
+
+  .exam-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .exam-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .exams-header h1 {
+    font-size: 30px;
+  }
+
+  .exam-countdown-card {
+    padding: 20px;
+  }
+
+  .exam-countdown {
+    gap: 7px;
+  }
+
+  .exam-countdown > div {
+    width: auto;
+    height: 70px;
+  }
+
+  .exam-countdown strong {
+    font-size: 22px;
+  }
+
+  .exam-item {
+    grid-template-columns: 1fr;
+
+    padding: 18px;
+  }
+
+  .exam-actions {
+    grid-column: auto;
+
+    padding-left: 0;
+
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .exam-form-card {
+    padding: 18px;
+  }
+}
