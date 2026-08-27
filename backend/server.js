@@ -10,27 +10,87 @@ connectDB();
 
 const app = express();
 
-// Middleware
+
+// ========================================
+// MIDDLEWARE
+// ========================================
+
 app.use(cors());
+
 app.use(express.json());
 
-// Auth routes
+
+// ========================================
+// AUTH
+// ========================================
+
 app.use(
   "/api/auth",
   require("./routes/authRoutes")
 );
 
-// Test route
+
+// ========================================
+// SUBJECTS
+// ========================================
+
+app.use(
+  "/api/subjects",
+  require("./routes/subjectRoutes")
+);
+
+
+// ========================================
+// SCHEDULES
+// ========================================
+
+app.use(
+  "/api/schedules",
+  require("./routes/scheduleRoutes")
+);
+
+// ========================================
+// ASSIGNMENTS
+// ========================================
+
+app.use(
+  "/api/assignments",
+  require("./routes/assignmentRoutes")
+);
+
+
+app.use(
+  "/api/todos",
+  require("./routes/todoRoutes")
+);
+
+
+
+// ========================================
+// TEST
+// ========================================
+
 app.get("/", (req, res) => {
+
   res.json({
-    message: "Study Planner API is running"
+    message:
+      "Study Planner API is running"
   });
+
 });
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(
-    `Server running on http://localhost:${PORT}`
-  );
-});
+const PORT =
+  process.env.PORT || 5000;
+
+
+app.listen(
+  PORT,
+  () => {
+
+    console.log(
+      `Server running on http://localhost:${PORT}`
+    );
+
+  }
+);
