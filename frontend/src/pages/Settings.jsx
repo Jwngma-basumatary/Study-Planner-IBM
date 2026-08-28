@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://study-planner-backend-ibm.onrender.com/";
 
 function Settings({ user, onUserUpdate }) {
   const fullName = user?.name || "Dianne Russell";
