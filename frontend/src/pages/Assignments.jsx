@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 
 const API_URL =
-  "http://localhost:5000";
+  "https://study-planner-backend-ibm.onrender.com/";
 
 
 function Assignments() {
