@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "https://study-planner-backend-ibm.onrender.com/";
+const API_URL = "http://localhost:5000";
 
 export function LegacyTodoList() {
   const [todos, setTodos] = useState([]);
