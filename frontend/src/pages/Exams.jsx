@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://study-planner-backend-ibm.onrender.com/";
 
 const EMPTY_FORM = {
   title: "",
