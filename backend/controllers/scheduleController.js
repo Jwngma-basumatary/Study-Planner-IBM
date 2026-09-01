@@ -2,18 +2,14 @@ const mongoose = require("mongoose");
 const Schedule = require("../models/Schedule");
 
 
-// ========================================
-// HELPER
-// ========================================
+
 
 const isValidId = (id) => {
   return mongoose.Types.ObjectId.isValid(id);
 };
 
 
-// ========================================
-// CALCULATE DURATION
-// ========================================
+
 
 const calculateDuration = (
   startTime,
@@ -48,10 +44,6 @@ const calculateDuration = (
 };
 
 
-// ========================================
-// GET SCHEDULES
-// GET /api/schedules
-// ========================================
 
 const getSchedules = async (req, res) => {
 
@@ -93,10 +85,7 @@ const getSchedules = async (req, res) => {
 };
 
 
-// ========================================
-// CREATE SCHEDULE
-// POST /api/schedules
-// ========================================
+
 
 const createSchedule = async (
   req,
@@ -150,8 +139,7 @@ const createSchedule = async (
     const schedule =
       await Schedule.create({
 
-        // IMPORTANT:
-        // User comes from JWT
+        
         user: req.user,
 
         title: title.trim(),
@@ -201,10 +189,7 @@ const createSchedule = async (
 };
 
 
-// ========================================
-// UPDATE SCHEDULE
-// PUT /api/schedules/:id
-// ========================================
+
 
 const updateSchedule = async (
   req,
@@ -265,8 +250,7 @@ const updateSchedule = async (
     }
 
 
-    // Only find schedule belonging
-    // to authenticated user.
+    
     const schedule =
       await Schedule.findOne({
         _id: id,
@@ -335,10 +319,7 @@ const updateSchedule = async (
 };
 
 
-// ========================================
-// DELETE SCHEDULE
-// DELETE /api/schedules/:id
-// ========================================
+
 
 const deleteSchedule = async (
   req,
@@ -393,10 +374,6 @@ const deleteSchedule = async (
 };
 
 
-// ========================================
-// TOGGLE COMPLETED
-// PATCH /api/schedules/:id/toggle
-// ========================================
 
 const toggleSchedule = async (
   req,
