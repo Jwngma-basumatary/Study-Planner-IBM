@@ -20,9 +20,6 @@ const validateExam = ({ title, subject, date }) => {
 };
 
 
-// ===============================
-// GET ALL EXAMS
-// ===============================
 
 const getExams = async (req, res) => {
   try {
@@ -49,9 +46,7 @@ const getExams = async (req, res) => {
 };
 
 
-// ===============================
-// CREATE EXAM
-// ===============================
+
 
 const createExam = async (req, res) => {
   try {
@@ -114,9 +109,7 @@ const createExam = async (req, res) => {
 };
 
 
-// ===============================
-// UPDATE EXAM
-// ===============================
+
 
 const updateExam = async (req, res) => {
   try {
@@ -199,9 +192,7 @@ const updateExam = async (req, res) => {
 };
 
 
-// ===============================
-// DELETE EXAM
-// ===============================
+
 
 const deleteExam = async (req, res) => {
   try {
@@ -241,9 +232,6 @@ const deleteExam = async (req, res) => {
 };
 
 
-// ===============================
-// UPDATE STATUS
-// ===============================
 
 const updateExamStatus = async (req, res) => {
   try {
