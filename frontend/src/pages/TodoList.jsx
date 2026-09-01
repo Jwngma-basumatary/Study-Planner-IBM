@@ -20,9 +20,6 @@ export function LegacyTodoList() {
     return localStorage.getItem("token");
   };
 
-  // ==========================================
-  // LOAD TODOS
-  // ==========================================
 
   const loadTodos = async () => {
     try {
@@ -60,10 +57,6 @@ export function LegacyTodoList() {
     loadTodos();
   }, []);
 
-  // ==========================================
-  // FORM CHANGE
-  // ==========================================
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -73,9 +66,6 @@ export function LegacyTodoList() {
     }));
   };
 
-  // ==========================================
-  // CREATE TODO
-  // ==========================================
 
   const createTodo = async (event) => {
     event.preventDefault();
@@ -141,9 +131,6 @@ export function LegacyTodoList() {
     }
   };
 
-  // ==========================================
-  // COMPLETE / UNCOMPLETE
-  // ==========================================
 
   const toggleTodo = async (todo) => {
     try {
@@ -188,9 +175,6 @@ export function LegacyTodoList() {
     }
   };
 
-  // ==========================================
-  // DELETE TODO
-  // ==========================================
 
   const deleteTodo = async (todo) => {
     const confirmed = window.confirm(
@@ -237,9 +221,6 @@ export function LegacyTodoList() {
     }
   };
 
-  // ==========================================
-  // STATUS HELPER
-  // ==========================================
 
   const isCompleted = (todo) => {
     return (
@@ -249,9 +230,7 @@ export function LegacyTodoList() {
     );
   };
 
-  // ==========================================
-  // RENDER
-  // ==========================================
+
 
   return (
     <main className="page-content todo-page">
@@ -294,7 +273,6 @@ export function LegacyTodoList() {
       )}
 
 
-      {/* CREATE FORM */}
 
       {showForm && (
         <form
@@ -375,7 +353,6 @@ export function LegacyTodoList() {
       )}
 
 
-      {/* TODO LIST */}
 
       <section className="todo-card">
 
