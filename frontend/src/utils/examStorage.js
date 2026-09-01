@@ -1,6 +1,3 @@
-// Exams are stored in MongoDB.
-// This file only contains reusable date helpers.
-
 export function getExamDate(
   date,
   time = "00:00"
