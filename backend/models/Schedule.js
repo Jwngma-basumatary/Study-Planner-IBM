@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const scheduleSchema = new mongoose.Schema(
   {
-    // Every schedule belongs to the authenticated user
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
