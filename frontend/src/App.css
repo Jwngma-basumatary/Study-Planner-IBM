@@ -1,6 +1,3 @@
-/* =========================
-   GLOBAL
-========================= */
 
 * {
   box-sizing: border-box;
@@ -27,9 +24,7 @@ button {
 }
 
 
-/* =========================
-   MAIN APP
-========================= */
+
 
 .app {
   min-height: 100vh;
@@ -37,9 +32,7 @@ button {
 }
 
 
-/* =========================
-   SIDEBAR
-========================= */
+
 
 .sidebar {
   width: 245px;
@@ -132,9 +125,6 @@ button {
 }
 
 
-/* =========================
-   MAIN CONTENT
-========================= */
 
 .main-content {
   width: calc(100% - 245px);
@@ -143,9 +133,7 @@ button {
 }
 
 
-/* =========================
-   HERO / WELCOME
-========================= */
+
 
 .hero-section {
   max-width: 1250px;
@@ -180,9 +168,7 @@ button {
   font-size: 14px;
 }
 
-/* =========================
-   SECTION HEADINGS
-========================= */
+
 
 .section-heading {
   display: flex;
@@ -204,9 +190,6 @@ button {
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
 
 .view-button,
 .text-button,
@@ -230,9 +213,6 @@ button {
 }
 
 
-/* =========================
-   COURSE OVERVIEW
-========================= */
 
 .course-overview {
   margin-bottom: 35px;
@@ -297,9 +277,6 @@ button {
 }
 
 
-/* =========================
-   TODAY'S SCHEDULE
-========================= */
 
 .schedule-section {
   margin-bottom: 30px;
@@ -375,9 +352,6 @@ button {
 }
 
 
-/* =========================
-   MAIN GRID
-========================= */
 
 .main-grid {
   max-width: 1250px;
@@ -395,9 +369,6 @@ button {
 }
 
 
-/* =========================
-   ASSIGNMENTS
-========================= */
 
 .assignment-list {
   display: flex;
@@ -448,9 +419,6 @@ button {
 }
 
 
-/* =========================
-   PRIORITIES
-========================= */
 
 .priority-list {
   display: flex;
@@ -478,9 +446,6 @@ button {
 }
 
 
-/* =========================
-   CALENDAR
-========================= */
 
 .calendar-card {
   min-height: 310px;
@@ -508,9 +473,6 @@ button {
 }
 
 
-/* =========================
-   CALENDAR GRID
-========================= */
 
 .calendar-header,
 .calendar-days {
@@ -530,9 +492,6 @@ button {
 }
 
 
-/* =========================
-   DATE AREA
-========================= */
 
 .calendar-days {
   row-gap: 6px;
@@ -573,9 +532,6 @@ button {
 }
 
 
-/* =========================
-   TODAY
-========================= */
 
 .calendar-days .today {
   background: #222;
@@ -587,9 +543,6 @@ button {
 }
 
 
-/* =========================
-   DAYS WITH TASKS
-========================= */
 
 .calendar-days .has-task::after {
   content: "";
@@ -606,19 +559,10 @@ button {
 }
 
 
-/* =========================
-   HOVER
-========================= */
 
 .calendar-days span:not(.empty):not(.today):hover {
   background: #f5f5f3;
 }
-
-
-/* =========================
-   REMOVE BUTTON DEFAULT
-   BROWSER STYLING
-========================= */
 
 .calendar-days button {
   appearance: none;
@@ -648,7 +592,6 @@ button {
 }
 
 
-/* Today button */
 
 .calendar-days button.today {
   background: #222;
@@ -659,15 +602,11 @@ button {
 }
 
 
-/* Hover on date buttons */
 
 .calendar-days button:not(.today):hover {
   background: #f5f5f3;
 }
 
-/* =========================
-   NOTES
-========================= */
 
 .notes-list {
   display: flex;
@@ -710,9 +649,6 @@ button {
 }
 
 
-/* =========================
-   EXAM COUNTDOWN
-========================= */
 
 .exam-card {
   background: #222222;
@@ -767,9 +703,6 @@ button {
 }
 
 
-/* =========================
-   ACTIVITY
-========================= */
 
 .activity-number {
   font-size: 13px;
@@ -813,9 +746,6 @@ button {
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1000px) {
 
@@ -877,9 +807,6 @@ button {
 
 
 
-/* =========================
-   PROFILE / SETTINGS
-========================= */
 
 .settings-page {
   max-width: 1160px;
@@ -1176,9 +1103,6 @@ button {
   }
 }
 
-/* =========================
-   AUTHENTICATION
-========================= */
 
 .auth-page {
   min-height: 100vh;
@@ -1203,7 +1127,6 @@ button {
 }
 
 
-/* LEFT */
 
 .auth-left {
   background: #222222;
@@ -1249,7 +1172,6 @@ button {
 }
 
 
-/* RIGHT */
 
 .auth-right {
   padding: 50px;
@@ -1347,7 +1269,6 @@ button {
 }
 
 
-/* LOGOUT */
 
 .logout-button {
   width: 100%;
@@ -1376,7 +1297,6 @@ button {
 }
 
 
-/* AUTH RESPONSIVE */
 
 @media (max-width: 750px) {
 
@@ -1408,11 +1328,6 @@ button {
 
 
 
-
-/* =========================
-   LOADING SCREEN
-========================= */
-
 .loading-screen {
   min-height: 100vh;
   display: flex;
@@ -1424,9 +1339,6 @@ button {
 }
 
 
-/* =========================
-   PAGE PLACEHOLDER
-========================= */
 
 .page-placeholder {
   max-width: 1250px;
@@ -1456,9 +1368,6 @@ button {
 }
 
 
-/* =========================
-   NAVIGATION BUTTON
-========================= */
 
 .nav-link-button {
   width: 100%;
@@ -1495,19 +1404,11 @@ button {
 
 
 
-/* ==================================================
-   COURSES PAGE
-================================================== */
-
 .courses-page {
   max-width: 1250px;
   margin: 0 auto;
 }
 
-
-/* =========================
-   COURSES HEADER
-========================= */
 
 .courses-header {
   display: flex;
@@ -1531,9 +1432,6 @@ button {
 }
 
 
-/* =========================
-   MESSAGES
-========================= */
 
 .courses-error,
 .courses-success {
@@ -1556,9 +1454,6 @@ button {
 }
 
 
-/* =========================
-   LOADING
-========================= */
 
 .courses-loading {
   background: white;
@@ -1569,10 +1464,6 @@ button {
   color: #777777;
 }
 
-
-/* =========================
-   FORM CARD
-========================= */
 
 .form-card {
   background: #ffffff;
@@ -1607,9 +1498,6 @@ button {
 }
 
 
-/* =========================
-   FORMS
-========================= */
 
 .form-card form,
 .chapter-form {
@@ -1649,9 +1537,6 @@ button {
 }
 
 
-/* =========================
-   FORM BUTTONS
-========================= */
 
 .form-actions {
   display: flex;
@@ -1687,9 +1572,6 @@ button {
 }
 
 
-/* =========================
-   EMPTY COURSES
-========================= */
 
 .empty-courses {
   background: #ffffff;
@@ -1724,9 +1606,6 @@ button {
 }
 
 
-/* =========================
-   SUBJECT GRID
-========================= */
 
 .subjects-grid {
   display: grid;
@@ -1736,9 +1615,6 @@ button {
 }
 
 
-/* =========================
-   SUBJECT CARD
-========================= */
 
 .subject-card {
   background: #ffffff;
@@ -1792,9 +1668,6 @@ button {
 }
 
 
-/* =========================
-   SUBJECT PROGRESS
-========================= */
 
 .subject-progress-header {
   display: flex;
@@ -1831,9 +1704,6 @@ button {
 }
 
 
-/* =========================
-   VIEW SUBJECT
-========================= */
 
 .view-subject-button {
   width: 100%;
@@ -1853,9 +1723,6 @@ button {
 }
 
 
-/* =========================
-   CHAPTER SECTION
-========================= */
 
 .chapter-section {
   margin-top: 18px;
@@ -1888,10 +1755,6 @@ button {
 }
 
 
-/* =========================
-   CHAPTER FORM
-========================= */
-
 .chapter-form {
   background: #f8f8f6;
   border: 1px solid #e6e6e3;
@@ -1905,10 +1768,6 @@ button {
   font-size: 14px;
 }
 
-
-/* =========================
-   CHAPTER LIST
-========================= */
 
 .chapter-list {
   display: flex;
@@ -1977,9 +1836,6 @@ button {
 }
 
 
-/* =========================
-   RESPONSIVE COURSES
-========================= */
 
 @media (max-width: 900px) {
 
@@ -2034,9 +1890,6 @@ button {
 }
 
 
-/* ==================================================
-   HOME DASHBOARD DATA STATES
-================================================== */
 
 .home-data-message {
   background: #ffffff;
@@ -2084,9 +1937,6 @@ button {
 
 
 
-/* ==================================================
-   SCHEDULE PAGE
-================================================== */
 
 .schedule-page {
   max-width: 1250px;
@@ -2094,9 +1944,6 @@ button {
 }
 
 
-/* =========================
-   HEADER
-========================= */
 
 .schedule-header {
   display: flex;
@@ -2120,9 +1967,6 @@ button {
 }
 
 
-/* =========================
-   STATES
-========================= */
 
 .schedule-loading {
   background: #ffffff;
@@ -2155,9 +1999,6 @@ button {
 }
 
 
-/* =========================
-   DATE CARD
-========================= */
 
 .schedule-date-card {
   display: flex;
@@ -2208,10 +2049,6 @@ button {
 }
 
 
-/* =========================
-   FORM
-========================= */
-
 .schedule-form-grid {
   display: grid;
   grid-template-columns:
@@ -2219,10 +2056,6 @@ button {
   column-gap: 18px;
 }
 
-
-/* =========================
-   SECTION
-========================= */
 
 .schedule-section {
   margin-bottom: 35px;
@@ -2245,9 +2078,6 @@ button {
 }
 
 
-/* =========================
-   EMPTY
-========================= */
 
 .schedule-empty {
   background: #ffffff;
@@ -2275,9 +2105,7 @@ button {
 }
 
 
-/* =========================
-   SCHEDULE LIST
-========================= */
+
 
 .schedule-list {
   display: flex;
@@ -2286,9 +2114,7 @@ button {
 }
 
 
-/* =========================
-   SCHEDULE CARD
-========================= */
+
 
 .schedule-card {
   display: flex;
@@ -2304,10 +2130,6 @@ button {
   opacity: 0.7;
 }
 
-
-/* =========================
-   TIME
-========================= */
 
 .schedule-time {
   width: 90px;
@@ -2327,10 +2149,6 @@ button {
   color: #999999;
 }
 
-
-/* =========================
-   DETAILS
-========================= */
 
 .schedule-details {
   flex: 1;
@@ -2376,10 +2194,6 @@ button {
 }
 
 
-/* =========================
-   BADGE
-========================= */
-
 .completed-badge {
   border-radius: 20px;
   background: #eeeeee;
@@ -2389,9 +2203,6 @@ button {
 }
 
 
-/* =========================
-   ACTIONS
-========================= */
 
 .schedule-actions {
   display: flex;
@@ -2416,9 +2227,6 @@ button {
 }
 
 
-/* =========================
-   UPCOMING
-========================= */
 
 .upcoming-list {
   display: flex;
@@ -2460,10 +2268,6 @@ button {
   white-space: nowrap;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 850px) {
 
@@ -2542,19 +2346,12 @@ button {
 }
 
 
-/* ==================================================
-   ASSIGNMENTS PAGE
-================================================== */
-
 .assignments-page {
   max-width: 1250px;
   margin: 0 auto;
 }
 
 
-/* =========================
-   HEADER
-========================= */
 
 .assignments-header {
   display: flex;
@@ -2578,9 +2375,6 @@ button {
 }
 
 
-/* =========================
-   STATES
-========================= */
 
 .assignment-loading {
   background: #ffffff;
@@ -2613,10 +2407,6 @@ button {
 }
 
 
-/* =========================
-   STATISTICS
-========================= */
-
 .assignment-stats {
   display: grid;
   grid-template-columns:
@@ -2645,9 +2435,6 @@ button {
 }
 
 
-/* =========================
-   FORM GRID
-========================= */
 
 .assignment-form-grid {
   display: grid;
@@ -2657,9 +2444,6 @@ button {
 }
 
 
-/* =========================
-   SELECT
-========================= */
 
 .form-card select,
 .assignment-filters select {
@@ -2674,10 +2458,6 @@ button {
   color: #222222;
 }
 
-
-/* =========================
-   FILTERS
-========================= */
 
 .assignment-filters {
   display: grid;
@@ -2704,9 +2484,6 @@ button {
 }
 
 
-/* =========================
-   EMPTY
-========================= */
 
 .assignment-empty {
   background: #ffffff;
@@ -2741,9 +2518,6 @@ button {
 }
 
 
-/* =========================
-   LIST
-========================= */
 
 .assignment-list {
   display: flex;
@@ -2752,9 +2526,6 @@ button {
 }
 
 
-/* =========================
-   CARD
-========================= */
 
 .assignment-card {
   display: flex;
@@ -2771,9 +2542,6 @@ button {
 }
 
 
-/* =========================
-   CHECK
-========================= */
 
 .assignment-check {
   flex: 0 0 auto;
@@ -2797,9 +2565,6 @@ button {
 }
 
 
-/* =========================
-   DETAILS
-========================= */
 
 .assignment-details {
   flex: 1;
@@ -2845,9 +2610,6 @@ button {
 }
 
 
-/* =========================
-   PRIORITY BADGES
-========================= */
 
 .priority-badge {
   display: inline-block;
@@ -2872,9 +2634,6 @@ button {
 }
 
 
-/* =========================
-   ACTIONS
-========================= */
 
 .assignment-actions {
   display: flex;
@@ -2885,9 +2644,6 @@ button {
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 900px) {
 
@@ -2952,9 +2708,7 @@ button {
 
 }
 
-/* ========================================
-   DASHBOARD TODAY'S SCHEDULE STATES
-======================================== */
+
 
 .home-schedule-message {
   background: #ffffff;
@@ -3013,9 +2767,6 @@ button {
 }
 
 
-/* ==================================================
-   TODO LIST
-================================================== */
 
 .todo-page {
   max-width: 1100px;
@@ -3043,9 +2794,6 @@ button {
 }
 
 
-/* =========================
-   ADD FORM
-========================= */
 
 .todo-add-form {
   display: flex;
@@ -3069,9 +2817,6 @@ button {
 }
 
 
-/* =========================
-   TODO LIST
-========================= */
 
 .todo-list {
   display: flex;
@@ -3122,10 +2867,6 @@ button {
 }
 
 
-/* =========================
-   EDIT
-========================= */
-
 .todo-edit-input {
   flex: 1;
   border: 1px solid #dddddd;
@@ -3136,9 +2877,6 @@ button {
 }
 
 
-/* =========================
-   EMPTY / ERROR
-========================= */
 
 .todo-empty {
   background: #ffffff;
@@ -3173,9 +2911,6 @@ button {
 }
 
 
-/* =========================
-   DASHBOARD TODO STATES
-========================= */
 
 .home-todo-message {
   text-align: center;
@@ -3222,9 +2957,6 @@ button {
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 600px) {
 
@@ -3252,11 +2984,6 @@ button {
 }
 
 
-/* =========================================================
-   EXAMS PAGE
-   Clean UI matching Assignments / Schedule
-========================================================= */
-
 .exams-page {
   width: 100%;
   max-width: 1145px;
@@ -3265,9 +2992,6 @@ button {
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
 
 .exams-header {
   display: flex;
@@ -3302,10 +3026,6 @@ button {
 }
 
 
-/* =========================================================
-   BUTTON
-========================================================= */
-
 .exams-header .add-button,
 .exam-empty .add-button {
   min-height: 40px;
@@ -3335,10 +3055,6 @@ button {
 }
 
 
-/* =========================================================
-   MESSAGES
-========================================================= */
-
 .exam-error,
 .exam-success {
   margin-bottom: 18px;
@@ -3362,9 +3078,6 @@ button {
 }
 
 
-/* =========================================================
-   NEXT EXAM
-========================================================= */
 
 .exam-countdown-card {
   min-height: 150px;
@@ -3412,9 +3125,6 @@ button {
 }
 
 
-/* =========================================================
-   COUNTDOWN
-========================================================= */
 
 .exam-countdown {
   display: flex;
@@ -3455,9 +3165,6 @@ button {
 }
 
 
-/* =========================================================
-   STATISTICS
-========================================================= */
 
 .exam-stats {
   display: grid;
@@ -3503,9 +3210,6 @@ button {
 }
 
 
-/* =========================================================
-   EXAM LIST
-========================================================= */
 
 .exam-list {
   display: flex;
@@ -3514,9 +3218,7 @@ button {
 }
 
 
-/* =========================================================
-   EXAM CARD
-========================================================= */
+ 
 
 .exam-item {
   min-height: 108px;
@@ -3559,9 +3261,6 @@ button {
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
 
 .exam-date-box {
   width: 58px;
@@ -3602,9 +3301,6 @@ button {
 }
 
 
-/* =========================================================
-   DETAILS
-========================================================= */
 
 .exam-details {
   min-width: 0;
@@ -3650,9 +3346,6 @@ button {
 }
 
 
-/* =========================================================
-   STATUS
-========================================================= */
 
 .exam-status {
   display: inline-flex;
@@ -3688,9 +3381,6 @@ button {
 }
 
 
-/* =========================================================
-   ACTIONS
-========================================================= */
 
 .exam-actions {
   display: flex;
@@ -3758,9 +3448,6 @@ button {
 }
 
 
-/* =========================================================
-   FORM
-========================================================= */
 
 .exam-form-card {
   margin-bottom: 20px;
@@ -3920,9 +3607,6 @@ button {
 }
 
 
-/* =========================================================
-   EMPTY / LOADING
-========================================================= */
 
 .exam-empty,
 .exam-loading {
@@ -3963,9 +3647,6 @@ button {
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 1000px) {
   .exam-item {
@@ -4058,9 +3739,6 @@ button {
 }
 
 
-/* =========================================================
-   TODO LIST PAGE
-========================================================= */
 
 .todos-page {
   width: 100%;
@@ -4069,9 +3747,6 @@ button {
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
 
 .todos-header {
   display: flex;
@@ -4116,10 +3791,6 @@ button {
 }
 
 
-/* =========================================================
-   ADD BUTTON
-========================================================= */
-
 .todos-header .add-button,
 .todo-empty .add-button {
   min-height: 40px;
@@ -4143,10 +3814,6 @@ button {
   background: #111;
 }
 
-
-/* =========================================================
-   MESSAGES
-========================================================= */
 
 .todo-error,
 .todo-success {
@@ -4176,9 +3843,6 @@ button {
 }
 
 
-/* =========================================================
-   FORM
-========================================================= */
 
 .todo-form-card {
   margin-bottom: 20px;
@@ -4344,9 +4008,6 @@ button {
 }
 
 
-/* =========================================================
-   STAT CARDS
-========================================================= */
 
 .todo-stats {
   display: grid;
@@ -4396,9 +4057,6 @@ button {
 }
 
 
-/* =========================================================
-   FILTERS
-========================================================= */
 
 .todo-filter-card {
   display: grid;
@@ -4458,9 +4116,6 @@ button {
 }
 
 
-/* =========================================================
-   TODO LIST
-========================================================= */
 
 .todo-list {
   display: flex;
@@ -4514,9 +4169,6 @@ button {
 }
 
 
-/* =========================================================
-   CHECKBOX
-========================================================= */
 
 .todo-checkbox {
   width: 28px;
@@ -4553,9 +4205,6 @@ button {
 }
 
 
-/* =========================================================
-   CONTENT
-========================================================= */
 
 .todo-content {
   min-width: 0;
@@ -4599,9 +4248,6 @@ button {
 }
 
 
-/* =========================================================
-   PRIORITY
-========================================================= */
 
 .todo-priority {
   display: inline-flex;
@@ -4640,9 +4286,6 @@ button {
 }
 
 
-/* =========================================================
-   ACTIONS
-========================================================= */
 
 .todo-actions {
   display: flex;
@@ -4684,10 +4327,6 @@ button {
 }
 
 
-/* =========================================================
-   EMPTY / LOADING
-========================================================= */
-
 .todo-empty,
 .todo-loading {
   padding: 55px 30px;
@@ -4726,9 +4365,6 @@ button {
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 900px) {
   .todo-stats {
@@ -4793,9 +4429,6 @@ button {
   }
 }
 
-/* =========================================================
-   DASHBOARD EXAM COUNTDOWN
-========================================================= */
 
 .exam-countdown-card {
   overflow: hidden;
@@ -4924,10 +4557,6 @@ button {
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
 @media (max-width: 1000px) {
   .exam-countdown-list {
     grid-template-columns:
@@ -4946,9 +4575,6 @@ button {
 }
 
 
-/* =========================================================
-   EXAM COUNTDOWN
-========================================================= */
 
 .exam-countdown-card {
   width: 100%;
@@ -4957,9 +4583,6 @@ button {
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
 
 .exam-countdown-header {
   width: 100%;
@@ -5008,9 +4631,6 @@ button {
 }
 
 
-/* =========================================================
-   EXAM CARDS
-========================================================= */
 
 .exam-countdown-list {
   width: 100%;
@@ -5030,10 +4650,6 @@ button {
   box-sizing: border-box;
 }
 
-
-/* =========================================================
-   INDIVIDUAL CARD
-========================================================= */
 
 .exam-mini-card {
   width: 100%;
@@ -5064,9 +4680,6 @@ button {
 }
 
 
-/* =========================================================
-   TITLE
-========================================================= */
 
 .exam-mini-top {
   width: 100%;
@@ -5095,9 +4708,6 @@ button {
 
   font-weight: 600;
 
-  /*
-    Allow long names to wrap.
-  */
 
   white-space: normal;
 
@@ -5122,11 +4732,6 @@ button {
   overflow-wrap: break-word;
 }
 
-
-/* =========================================================
-   DATE
-========================================================= */
-
 .exam-mini-date {
   margin-top: 8px;
 
@@ -5137,10 +4742,6 @@ button {
   line-height: 1.3;
 }
 
-
-/* =========================================================
-   PROGRESS CIRCLE
-========================================================= */
 
 .exam-progress {
   display: flex;
@@ -5181,9 +4782,7 @@ button {
 }
 
 
-/* =========================================================
-   DAYS LEFT
-========================================================= */
+
 
 .exam-days {
   display: flex;
@@ -5218,10 +4817,6 @@ button {
 }
 
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
 .exam-empty-state {
   width: 100%;
 
@@ -5249,9 +4844,6 @@ button {
 }
 
 
-/* =========================================================
-   LARGE SCREEN
-========================================================= */
 
 @media (min-width: 1200px) {
 
@@ -5275,9 +4867,7 @@ button {
 }
 
 
-/* =========================================================
-   TABLET
-========================================================= */
+
 
 @media (max-width: 1000px) {
 
@@ -5289,9 +4879,7 @@ button {
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+
 
 @media (max-width: 650px) {
 
@@ -5313,9 +4901,6 @@ button {
 
 }
 
-/* =========================
-   DARK MODE
-========================= */
 
 body.dark-mode {
   background: #111111;
@@ -5333,7 +4918,6 @@ body.dark-mode .main-content {
   background: #111111;
 }
 
-/* Cards */
 body.dark-mode .course-card,
 body.dark-mode .dashboard-card,
 body.dark-mode .schedule-card,
@@ -5353,7 +4937,6 @@ body.dark-mode .assignment-empty {
   color: #ffffff;
 }
 
-/* Headings */
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
@@ -5363,7 +4946,6 @@ body.dark-mode .section-heading h2 {
   color: #ffffff;
 }
 
-/* Normal text */
 body.dark-mode .welcome-text,
 body.dark-mode .schedule-info p,
 body.dark-mode .assignment-subject,
@@ -5375,7 +4957,6 @@ body.dark-mode .section-heading p {
   color: #aaaaaa;
 }
 
-/* Sidebar navigation */
 body.dark-mode .side-nav a,
 body.dark-mode .nav-link-button,
 body.dark-mode .logout-button {
@@ -5389,13 +4970,11 @@ body.dark-mode .logout-button:hover {
   color: #ffffff;
 }
 
-/* Active navigation */
 body.dark-mode .side-nav a.active {
   background: #ffffff;
   color: #111111;
 }
 
-/* Form inputs */
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode select {
@@ -5404,12 +4983,10 @@ body.dark-mode select {
   border-color: #444444;
 }
 
-/* Small sidebar headings */
 body.dark-mode .nav-title {
   color: #777777;
 }
 
-/* Profile subtitle */
 body.dark-mode .profile p {
   color: #888888;
 }
@@ -5418,9 +4995,7 @@ body.dark-mode .profile p {
 
 
 
-/* =========================
-   REMOVE HOME SEARCH BAR
-========================= */
+
 
 .search-box {
   display: none !important;
