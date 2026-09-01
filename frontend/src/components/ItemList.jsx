@@ -2,10 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 function ItemList() {
-  // ========================================
-  // STATE
-  // ========================================
-
+  
   const [schedules, setSchedules] = useState([]);
   const [todos, setTodos] = useState([]);
   const [assignments, setAssignments] = useState([]);
@@ -20,9 +17,6 @@ function ItemList() {
 
   const [now, setNow] = useState(() => new Date());
 
-  // ========================================
-  // AUTH / API HELPERS
-  // ========================================
 
   const getToken = () => localStorage.getItem("token");
 
@@ -129,10 +123,9 @@ function ItemList() {
     return data;
   };
 
-  // ========================================
-  // DATE HELPERS
-  // ========================================
 
+
+  
   const getDateKey = (date) => {
     if (!date) return "";
 
@@ -234,9 +227,6 @@ function ItemList() {
     return `${hours} hr ${remainingMinutes} min`;
   };
 
-  // ========================================
-  // LOAD ALL DASHBOARD DATA
-  // ========================================
 
   const loadDashboardData = async () => {
     const token = getToken();
@@ -321,9 +311,6 @@ function ItemList() {
     return () => clearInterval(interval);
   }, []);
 
-  // ========================================
-  // TODAY'S DATA
-  // ========================================
 
   const today = getTodayDate();
 
@@ -443,9 +430,6 @@ function ItemList() {
 
   const nextExam = upcomingExams[0] || null;
 
-  // ========================================
-  // EXAM COUNTDOWN
-  // ========================================
 
   const examCountdown = useMemo(() => {
     if (!nextExam) return null;
@@ -481,9 +465,6 @@ function ItemList() {
     };
   }, [nextExam, now]);
 
-  // ========================================
-  // CALENDAR
-  // ========================================
 
   const calendarData = useMemo(() => {
     const year = calendarMonth.getFullYear();
@@ -597,10 +578,7 @@ function ItemList() {
     );
   };
 
-  // ========================================
-  // TODO TOGGLE
-  // ========================================
-
+  
   const handleToggleTodo = async (todo) => {
     try {
       setError("");
@@ -655,10 +633,7 @@ function ItemList() {
     }
   };
 
-  // ========================================
-// STUDY ACTIVITY
-// Total duration of schedules for each day
-// ========================================
+  
 
 const weeklyActivity = useMemo(() => {
   const days = [];
@@ -736,10 +711,7 @@ const maxActivity =
     1
   );
   
-  // ========================================
-  // RENDER
-  // ========================================
-
+  
   return (
     <div className="dashboard-content">
       {error && (
@@ -748,9 +720,7 @@ const maxActivity =
         </div>
       )}
 
-      {/* ====================================
-          TODAY'S SCHEDULE
-      ==================================== */}
+      
 
       <section
         className="schedule-section"
@@ -835,14 +805,9 @@ const maxActivity =
           )}
       </section>
 
-      {/* ====================================
-          MAIN GRID
-      ==================================== */}
+
 
       <div className="main-grid">
-        {/* ==================================
-            UPCOMING ASSIGNMENTS
-        ================================== */}
 
         <section
           className="dashboard-card"
@@ -920,9 +885,7 @@ const maxActivity =
           </div>
         </section>
 
-        {/* ==================================
-            TOP PRIORITIES
-        ================================== */}
+        
 
         <section
           className="dashboard-card"
@@ -978,9 +941,7 @@ const maxActivity =
           </div>
         </section>
 
-        {/* ==================================
-            CALENDAR
-        ================================== */}
+
 
         <section className="dashboard-card calendar-card">
           <div className="section-heading">
@@ -1110,10 +1071,7 @@ const maxActivity =
           </div>
         </section>
 
-        {/* ==================================
-            TODO LIST
-        ================================== */}
-
+        
         <section
           className="dashboard-card"
           id="todos"
@@ -1241,9 +1199,7 @@ const maxActivity =
           </div>
         </section>
 
-        {/* ==================================
-            EXAM COUNTDOWN
-        ================================== */}
+
 
         <section
           className="dashboard-card exam-card"
@@ -1361,9 +1317,7 @@ const maxActivity =
             )}
         </section>
 
-        {/* ==================================
-            ACTIVITY
-        ================================== */}
+        
 
         <section
           className="dashboard-card activity-card"
