@@ -24,10 +24,6 @@ const getAssignments = async (
       subject
     } = req.query;
 
-
-    // VERY IMPORTANT:
-    // Only get assignments belonging
-    // to the logged-in user.
     const filter = {
       user: req.user
     };
