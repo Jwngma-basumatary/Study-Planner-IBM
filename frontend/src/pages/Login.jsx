@@ -16,7 +16,6 @@ function Login({ onLogin, goToRegister }) {
     setLoading(true);
 
     try {
-      // Send login details to backend
       const response = await fetch(
         `${API_URL}/api/auth/login`,
         {
@@ -35,7 +34,6 @@ function Login({ onLogin, goToRegister }) {
 
       const data = await response.json();
 
-      // Backend returned an error
       if (!response.ok) {
         setError(
           data.message || "Login failed."
@@ -44,19 +42,16 @@ function Login({ onLogin, goToRegister }) {
         return;
       }
 
-      // Save JWT
       localStorage.setItem(
         "token",
         data.token
       );
 
-      // Save safe user information
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
-      // Tell App that login was successful
       onLogin(data.user);
 
     } catch (error) {
@@ -77,7 +72,6 @@ function Login({ onLogin, goToRegister }) {
 
       <div className="auth-container">
 
-        {/* LEFT SIDE */}
         <div className="auth-left">
 
           <div className="auth-brand">
@@ -107,7 +101,6 @@ function Login({ onLogin, goToRegister }) {
         </div>
 
 
-        {/* RIGHT SIDE */}
         <div className="auth-right">
 
           <div className="auth-form-container">
@@ -121,7 +114,6 @@ function Login({ onLogin, goToRegister }) {
             </p>
 
 
-            {/* ERROR */}
             {error && (
               <div className="auth-error">
                 {error}
@@ -129,7 +121,6 @@ function Login({ onLogin, goToRegister }) {
             )}
 
 
-            {/* LOGIN FORM */}
             <form onSubmit={handleLogin}>
 
               <label htmlFor="login-email">
@@ -177,7 +168,6 @@ function Login({ onLogin, goToRegister }) {
             </form>
 
 
-            {/* REGISTER LINK */}
             <p className="switch-auth">
 
               Don't have an account?
