@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 
 const assignmentSchema = new mongoose.Schema(
   {
-    // Every assignment belongs to
-    // one authenticated user.
+    
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
