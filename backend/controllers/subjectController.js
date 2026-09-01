@@ -2,27 +2,20 @@ const mongoose = require("mongoose");
 const Subject = require("../models/Subject");
 
 
-// ========================================
-// HELPER: CHECK OBJECT ID
-// ========================================
+
 
 const isValidId = (id) => {
   return mongoose.Types.ObjectId.isValid(id);
 };
 
 
-// ========================================
-// GET ALL SUBJECTS
-// GET /api/subjects
-// ========================================
+
 
 const getSubjects = async (req, res) => {
 
   try {
 
-    // IMPORTANT:
-    // Only get subjects belonging to
-    // the currently authenticated user.
+    
     const subjects = await Subject.find({
       user: req.user
     }).sort({
@@ -48,10 +41,7 @@ const getSubjects = async (req, res) => {
 };
 
 
-// ========================================
-// CREATE SUBJECT
-// POST /api/subjects
-// ========================================
+
 
 const createSubject = async (req, res) => {
 
@@ -73,7 +63,6 @@ const createSubject = async (req, res) => {
 
     const subject = await Subject.create({
 
-      // Comes from verified JWT
       user: req.user,
 
       name: name.trim(),
@@ -106,10 +95,7 @@ const createSubject = async (req, res) => {
 };
 
 
-// ========================================
-// UPDATE SUBJECT
-// PUT /api/subjects/:id
-// ========================================
+
 
 const updateSubject = async (req, res) => {
 
@@ -141,8 +127,7 @@ const updateSubject = async (req, res) => {
     }
 
 
-    // IMPORTANT:
-    // Match BOTH subject ID and authenticated user.
+    
     const subject =
       await Subject.findOne({
         _id: id,
@@ -188,10 +173,6 @@ const updateSubject = async (req, res) => {
 };
 
 
-// ========================================
-// DELETE SUBJECT
-// DELETE /api/subjects/:id
-// ========================================
 
 const deleteSubject = async (req, res) => {
 
@@ -210,8 +191,7 @@ const deleteSubject = async (req, res) => {
     }
 
 
-    // Only delete if it belongs to
-    // the authenticated user.
+    
     const subject =
       await Subject.findOneAndDelete({
         _id: id,
@@ -245,10 +225,6 @@ const deleteSubject = async (req, res) => {
 };
 
 
-// ========================================
-// ADD CHAPTER
-// POST /api/subjects/:id/chapters
-// ========================================
 
 const addChapter = async (req, res) => {
 
@@ -328,11 +304,6 @@ const addChapter = async (req, res) => {
   }
 };
 
-
-// ========================================
-// UPDATE CHAPTER
-// PUT /api/subjects/:id/chapters/:chapterId
-// ========================================
 
 const updateChapter = async (req, res) => {
 
@@ -426,10 +397,6 @@ const updateChapter = async (req, res) => {
 };
 
 
-// ========================================
-// DELETE CHAPTER
-// DELETE /api/subjects/:id/chapters/:chapterId
-// ========================================
 
 const deleteChapter = async (req, res) => {
 
@@ -503,12 +470,6 @@ const deleteChapter = async (req, res) => {
   }
 };
 
-
-// ========================================
-// TOGGLE CHAPTER
-// PATCH /api/subjects/:id/chapters/:chapterId/toggle
-// ========================================
-
 const toggleChapter = async (req, res) => {
 
   try {
@@ -557,7 +518,6 @@ const toggleChapter = async (req, res) => {
     }
 
 
-    // Switch completed ↔ incomplete
     chapter.completed =
       !chapter.completed;
 
