@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 
 
-// =============================
-// CHAPTER SCHEMA
-// =============================
+
 
 const chapterSchema = new mongoose.Schema(
   {
@@ -30,14 +28,10 @@ const chapterSchema = new mongoose.Schema(
 );
 
 
-// =============================
-// SUBJECT SCHEMA
-// =============================
 
 const subjectSchema = new mongoose.Schema(
   {
-    // IMPORTANT:
-    // Every subject belongs to one authenticated user.
+  
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -68,9 +62,6 @@ const subjectSchema = new mongoose.Schema(
 );
 
 
-// =============================
-// AUTOMATIC PROGRESS
-// =============================
 
 subjectSchema.virtual("progress").get(function () {
 
