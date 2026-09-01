@@ -7,9 +7,7 @@ function Hero({
   onNavigate
 }) {
 
-  // ========================================
-  // STATE
-  // ========================================
+
 
   const [subjects, setSubjects] =
     useState([]);
@@ -21,10 +19,7 @@ function Hero({
     useState("");
 
 
-  // ========================================
-  // TODAY
-  // ========================================
-
+  
   const today =
     new Date().toLocaleDateString(
       "en-US",
@@ -35,9 +30,7 @@ function Hero({
       }
     ).toUpperCase();
 
-  // ========================================
-  // DYNAMIC GREETING
-  // ========================================
+  
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -53,9 +46,7 @@ function Hero({
 
 
     
-  // ========================================
-  // GET SUBJECTS FROM MONGODB
-  // ========================================
+  
 
   const loadSubjects = async () => {
 
@@ -94,9 +85,7 @@ function Hero({
         );
 
 
-      // ====================================
-      // SESSION EXPIRED
-      // ====================================
+
 
       if (response.status === 401) {
 
@@ -127,9 +116,7 @@ function Hero({
       }
 
 
-      // ====================================
-      // STORE REAL SUBJECTS
-      // ====================================
+
 
       setSubjects(
         data.subjects || []
@@ -154,9 +141,7 @@ function Hero({
   };
 
 
-  // ========================================
-  // LOAD SUBJECTS WHEN HOME OPENS
-  // ========================================
+  
 
   useEffect(() => {
 
@@ -165,10 +150,7 @@ function Hero({
   }, []);
 
 
-  // ========================================
-  // CALCULATE SUBJECT PROGRESS
-  // ========================================
-
+  
   const getSubjectProgress = (
     subject
   ) => {
@@ -198,9 +180,7 @@ function Hero({
   };
 
 
-  // ========================================
-  // GET CHAPTER COUNT
-  // ========================================
+  
 
   const getChapterText = (
     subject
@@ -218,10 +198,7 @@ function Hero({
   };
 
 
-  // ========================================
-  // GET SUBJECT INITIALS
-  // ========================================
-
+  
   const getSubjectInitials = (
     name
   ) => {
@@ -252,18 +229,13 @@ function Hero({
   };
 
 
-  // ========================================
-  // USER NAME
-  // ========================================
+  
 
   const userName =
     user?.name || "Student";
 
 
-  // ========================================
-  // RENDER
-  // ========================================
-
+  
   return (
 
     <section
@@ -271,9 +243,7 @@ function Hero({
       id="home"
     >
 
-      {/* ====================================
-          WELCOME SECTION
-      ==================================== */}
+      
 
       <div className="welcome">
 
@@ -299,9 +269,7 @@ function Hero({
       </div>
 
 
-      {/* ====================================
-          COURSE OVERVIEW
-      ==================================== */}
+
 
       <div
         className="course-overview"
@@ -336,9 +304,6 @@ function Hero({
         </div>
 
 
-        {/* ==================================
-            LOADING
-        ================================== */}
 
         {loadingSubjects && (
 
@@ -351,9 +316,7 @@ function Hero({
         )}
 
 
-        {/* ==================================
-            ERROR
-        ================================== */}
+
 
         {!loadingSubjects &&
           subjectsError && (
@@ -367,9 +330,7 @@ function Hero({
         )}
 
 
-        {/* ==================================
-            EMPTY STATE
-        ================================== */}
+
 
         {!loadingSubjects &&
           !subjectsError &&
@@ -402,9 +363,6 @@ function Hero({
         )}
 
 
-        {/* ==================================
-            REAL SUBJECTS
-        ================================== */}
 
         {!loadingSubjects &&
           !subjectsError &&
