@@ -34,8 +34,7 @@ const calculateDuration = (
 
   let difference = end - start;
 
-  // If end time is before start time,
-  // treat it as an overnight schedule.
+  
   if (difference < 0) {
     difference += 24 * 60;
   }
