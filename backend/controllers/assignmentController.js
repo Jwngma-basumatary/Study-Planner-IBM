@@ -4,28 +4,12 @@ const Assignment =
   require("../models/Assignment");
 
 
-// ========================================
-// HELPER
-// ========================================
-
 const isValidId = (id) => {
 
   return mongoose.Types.ObjectId.isValid(id);
 
 };
 
-
-// ========================================
-// GET ASSIGNMENTS
-//
-// GET /api/assignments
-//
-// Optional:
-// /api/assignments?status=pending
-// /api/assignments?status=completed
-// /api/assignments?priority=High
-// /api/assignments?subject=Database
-// ========================================
 
 const getAssignments = async (
   req,
@@ -48,11 +32,6 @@ const getAssignments = async (
       user: req.user
     };
 
-
-    // ====================================
-    // STATUS FILTER
-    // ====================================
-
     if (status === "completed") {
 
       filter.completed = true;
@@ -66,10 +45,6 @@ const getAssignments = async (
 
     }
 
-
-    // ====================================
-    // PRIORITY FILTER
-    // ====================================
 
     if (
       priority &&
@@ -86,9 +61,6 @@ const getAssignments = async (
     }
 
 
-    // ====================================
-    // SUBJECT FILTER
-    // ====================================
 
     if (subject) {
 
@@ -129,12 +101,6 @@ const getAssignments = async (
 };
 
 
-// ========================================
-// CREATE ASSIGNMENT
-//
-// POST /api/assignments
-// ========================================
-
 const createAssignment = async (
   req,
   res
@@ -152,10 +118,6 @@ const createAssignment = async (
     } = req.body;
 
 
-    // ====================================
-    // VALIDATION
-    // ====================================
-
     if (
       !title ||
       !subject ||
@@ -170,9 +132,6 @@ const createAssignment = async (
     }
 
 
-    // ====================================
-    // VALID PRIORITY
-    // ====================================
 
     const validPriorities = [
       "Low",
@@ -188,10 +147,6 @@ const createAssignment = async (
         ? priority
         : "Medium";
 
-
-    // ====================================
-    // CREATE
-    // ====================================
 
     const assignment =
       await Assignment.create({
@@ -252,12 +207,6 @@ const createAssignment = async (
 };
 
 
-// ========================================
-// UPDATE ASSIGNMENT
-//
-// PUT /api/assignments/:id
-// ========================================
-
 const updateAssignment = async (
   req,
   res
@@ -280,10 +229,6 @@ const updateAssignment = async (
     } = req.body;
 
 
-    // ====================================
-    // VALID ID
-    // ====================================
-
     if (!isValidId(id)) {
 
       return res.status(400).json({
@@ -293,10 +238,6 @@ const updateAssignment = async (
 
     }
 
-
-    // ====================================
-    // REQUIRED FIELDS
-    // ====================================
 
     if (
       !title ||
@@ -311,10 +252,6 @@ const updateAssignment = async (
 
     }
 
-
-    // ====================================
-    // PRIORITY
-    // ====================================
 
     const validPriorities = [
       "Low",
@@ -331,10 +268,6 @@ const updateAssignment = async (
         : "Medium";
 
 
-    // ====================================
-    // FIND USER'S ASSIGNMENT
-    // ====================================
-
     const assignment =
       await Assignment.findOne({
         _id: id,
@@ -350,11 +283,6 @@ const updateAssignment = async (
       });
 
     }
-
-
-    // ====================================
-    // UPDATE
-    // ====================================
 
     assignment.title =
       title.trim();
@@ -409,12 +337,6 @@ const updateAssignment = async (
 };
 
 
-// ========================================
-// DELETE ASSIGNMENT
-//
-// DELETE /api/assignments/:id
-// ========================================
-
 const deleteAssignment = async (
   req,
   res
@@ -436,9 +358,6 @@ const deleteAssignment = async (
 
     }
 
-
-    // Only delete the logged-in
-    // user's assignment.
     const assignment =
       await Assignment.findOneAndDelete({
         _id: id,
@@ -480,12 +399,6 @@ const deleteAssignment = async (
 
 };
 
-
-// ========================================
-// TOGGLE COMPLETION
-//
-// PATCH /api/assignments/:id/toggle
-// ========================================
 
 const toggleAssignment = async (
   req,
