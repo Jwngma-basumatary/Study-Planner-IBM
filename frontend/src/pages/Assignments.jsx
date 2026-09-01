@@ -6,10 +6,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function Assignments() {
 
-  // ========================================
-  // DATA
-  // ========================================
-
+  
   const [assignments, setAssignments] =
     useState([]);
 
@@ -26,9 +23,7 @@ function Assignments() {
     useState("");
 
 
-  // ========================================
-  // FILTERS
-  // ========================================
+  
 
   const [statusFilter, setStatusFilter] =
     useState("all");
@@ -42,9 +37,7 @@ function Assignments() {
     useState("all");
 
 
-  // ========================================
-  // FORM
-  // ========================================
+  
 
   const [showForm, setShowForm] =
     useState(false);
@@ -78,9 +71,6 @@ function Assignments() {
     useState("");
 
 
-  // ========================================
-  // TOKEN
-  // ========================================
 
   const getToken = () => {
 
@@ -91,9 +81,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // API REQUEST
-  // ========================================
 
   const apiRequest = async (
     url,
@@ -173,9 +160,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // LOAD ASSIGNMENTS
-  // ========================================
 
   const loadAssignments = async () => {
 
@@ -227,9 +211,6 @@ function Assignments() {
   }, []);
 
 
-  // ========================================
-  // SUCCESS MESSAGE
-  // ========================================
 
   const showSuccessMessage = (
     message
@@ -247,9 +228,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // RESET FORM
-  // ========================================
 
   const resetForm = () => {
 
@@ -272,9 +250,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // OPEN ADD FORM
-  // ========================================
 
   const openAddForm = () => {
 
@@ -287,9 +262,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // OPEN EDIT FORM
-  // ========================================
 
   const openEditForm = (
     assignment
@@ -337,9 +309,6 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // SAVE ASSIGNMENT
-  // ========================================
 
   const handleSubmit = async (
     event
@@ -476,9 +445,7 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // DELETE
-  // ========================================
+  
 
   const handleDelete = async (
     assignment
@@ -546,10 +513,7 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // TOGGLE COMPLETION
-  // ========================================
-
+  
   const handleToggle = async (
     assignment
   ) => {
@@ -603,9 +567,7 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // DATE FORMAT
-  // ========================================
+  
 
   const formatDate = (
     date
@@ -632,9 +594,7 @@ function Assignments() {
   };
 
 
-  // ========================================
-  // GET SUBJECTS
-  // ========================================
+
 
   const subjects = [
     ...new Set(
@@ -646,9 +606,6 @@ function Assignments() {
   ];
 
 
-  // ========================================
-  // FILTER ASSIGNMENTS
-  // ========================================
 
   const filteredAssignments =
     assignments.filter(
@@ -709,9 +666,7 @@ function Assignments() {
     );
 
 
-  // ========================================
-  // STATISTICS
-  // ========================================
+  
 
   const totalAssignments =
     assignments.length;
@@ -738,9 +693,7 @@ function Assignments() {
     ).length;
 
 
-  // ========================================
-  // LOADING
-  // ========================================
+  
 
   if (loading) {
 
@@ -780,18 +733,13 @@ function Assignments() {
   }
 
 
-  // ========================================
-  // PAGE
-  // ========================================
+  
 
   return (
 
     <section className="assignments-page">
 
 
-      {/* ====================================
-          HEADER
-      ==================================== */}
 
       <div className="assignments-header">
 
@@ -823,10 +771,7 @@ function Assignments() {
       </div>
 
 
-      {/* ====================================
-          MESSAGES
-      ==================================== */}
-
+      
       {error && (
 
         <div className="assignment-error">
@@ -845,9 +790,7 @@ function Assignments() {
       )}
 
 
-      {/* ====================================
-          STATISTICS
-      ==================================== */}
+      
 
       <div className="assignment-stats">
 
@@ -905,9 +848,6 @@ function Assignments() {
       </div>
 
 
-      {/* ====================================
-          FORM
-      ==================================== */}
 
       {showForm && (
 
@@ -942,7 +882,6 @@ function Assignments() {
             <div className="assignment-form-grid">
 
 
-              {/* TITLE */}
 
               <div>
 
@@ -964,7 +903,6 @@ function Assignments() {
               </div>
 
 
-              {/* SUBJECT */}
 
               <div>
 
@@ -986,7 +924,6 @@ function Assignments() {
               </div>
 
 
-              {/* TOPIC */}
 
               <div>
 
@@ -1008,7 +945,6 @@ function Assignments() {
               </div>
 
 
-              {/* DUE DATE */}
 
               <div>
 
@@ -1029,7 +965,6 @@ function Assignments() {
               </div>
 
 
-              {/* PRIORITY */}
 
               <div>
 
@@ -1065,7 +1000,6 @@ function Assignments() {
             </div>
 
 
-            {/* DESCRIPTION */}
 
             <label>
               Description
@@ -1083,7 +1017,6 @@ function Assignments() {
             />
 
 
-            {/* BUTTONS */}
 
             <div className="form-actions">
 
@@ -1116,9 +1049,7 @@ function Assignments() {
       )}
 
 
-      {/* ====================================
-          FILTERS
-      ==================================== */}
+      
 
       <div className="assignment-filters">
 
@@ -1230,9 +1161,7 @@ function Assignments() {
       </div>
 
 
-      {/* ====================================
-          ASSIGNMENT LIST
-      ==================================== */}
+      
 
       {filteredAssignments.length === 0 ? (
 
@@ -1282,7 +1211,6 @@ function Assignments() {
               >
 
 
-                {/* CHECK */}
 
                 <button
                   type="button"
@@ -1301,7 +1229,6 @@ function Assignments() {
                 </button>
 
 
-                {/* DETAILS */}
 
                 <div className="assignment-details">
 
@@ -1372,7 +1299,6 @@ function Assignments() {
                 </div>
 
 
-                {/* ACTIONS */}
 
                 <div className="assignment-actions">
 
