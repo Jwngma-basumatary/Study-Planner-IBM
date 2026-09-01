@@ -4,9 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function Schedule() {
 
-  // ========================================
-  // STATE
-  // ========================================
+  
 
   const [schedules, setSchedules] =
     useState([]);
@@ -21,7 +19,6 @@ function Schedule() {
     useState("");
 
 
-  // Selected date
   const [selectedDate, setSelectedDate] =
     useState(() => {
 
@@ -32,8 +29,6 @@ function Schedule() {
         .split("T")[0];
     });
 
-
-  // Form
   const [showForm, setShowForm] =
     useState(false);
 
@@ -62,18 +57,10 @@ function Schedule() {
     useState("");
 
 
-  // ========================================
-  // TOKEN
-  // ========================================
-
   const getToken = () => {
     return localStorage.getItem("token");
   };
 
-
-  // ========================================
-  // API REQUEST
-  // ========================================
 
   const apiRequest = async (
     url,
@@ -143,10 +130,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // LOAD SCHEDULES
-  // ========================================
-
   const loadSchedules = async () => {
 
     try {
@@ -192,10 +175,6 @@ function Schedule() {
   }, []);
 
 
-  // ========================================
-  // SUCCESS MESSAGE
-  // ========================================
-
   const showSuccessMessage = (
     message
   ) => {
@@ -207,10 +186,6 @@ function Schedule() {
     }, 2500);
   };
 
-
-  // ========================================
-  // RESET FORM
-  // ========================================
 
   const resetForm = () => {
 
@@ -234,9 +209,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // OPEN ADD
-  // ========================================
 
   const openAddForm = () => {
 
@@ -260,12 +232,7 @@ function Schedule() {
 
     setShowForm(true);
   };
-
-
-  // ========================================
-  // OPEN EDIT
-  // ========================================
-
+  
   const openEditForm = (
     schedule
   ) => {
@@ -306,11 +273,6 @@ function Schedule() {
 
     setShowForm(true);
   };
-
-
-  // ========================================
-  // SAVE
-  // ========================================
 
   const handleSubmit = async (
     event
@@ -443,10 +405,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // DELETE
-  // ========================================
-
   const handleDelete = async (
     schedule
   ) => {
@@ -504,9 +462,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // TOGGLE
-  // ========================================
 
   const handleToggle = async (
     schedule
@@ -551,9 +506,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // FORMAT DATE
-  // ========================================
 
   const formatDate = (
     dateValue
@@ -577,9 +529,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // FORMAT TIME
-  // ========================================
 
   const formatTime = (
     time
@@ -619,10 +568,6 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // FORMAT DURATION
-  // ========================================
-
   const formatDuration = (
     minutes
   ) => {
@@ -657,9 +602,7 @@ function Schedule() {
   };
 
 
-  // ========================================
-  // DATE FILTER
-  // ========================================
+
 
   const filteredSchedules =
     schedules.filter(
@@ -669,9 +612,6 @@ function Schedule() {
     );
 
 
-  // ========================================
-  // UPCOMING
-  // ========================================
 
   const upcomingSchedules =
     schedules
@@ -682,10 +622,6 @@ function Schedule() {
       )
       .slice(0, 5);
 
-
-  // ========================================
-  // LOADING
-  // ========================================
 
   if (loading) {
 
@@ -724,9 +660,6 @@ function Schedule() {
   }
 
 
-  // ========================================
-  // PAGE
-  // ========================================
 
   return (
 
@@ -765,8 +698,6 @@ function Schedule() {
       </div>
 
 
-      {/* MESSAGES */}
-
       {error && (
 
         <div className="schedule-error">
@@ -784,8 +715,6 @@ function Schedule() {
 
       )}
 
-
-      {/* DATE SELECTOR */}
 
       <div className="schedule-date-card">
 
@@ -825,7 +754,6 @@ function Schedule() {
       </div>
 
 
-      {/* FORM */}
 
       {showForm && (
 
@@ -1019,7 +947,6 @@ function Schedule() {
       )}
 
 
-      {/* TODAY */}
 
       <div className="schedule-section">
 
@@ -1082,8 +1009,6 @@ function Schedule() {
                   }
                 >
 
-                  {/* TIME */}
-
                   <div className="schedule-time">
 
                     <strong>
@@ -1099,9 +1024,6 @@ function Schedule() {
                     </span>
 
                   </div>
-
-
-                  {/* DETAILS */}
 
                   <div className="schedule-details">
 
@@ -1149,8 +1071,6 @@ function Schedule() {
 
                   </div>
 
-
-                  {/* ACTIONS */}
 
                   <div className="schedule-actions">
 
@@ -1207,8 +1127,6 @@ function Schedule() {
 
       </div>
 
-
-      {/* UPCOMING */}
 
       <div className="schedule-section">
 
