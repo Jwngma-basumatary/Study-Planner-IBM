@@ -17,13 +17,11 @@ function Register({ onRegister, goToLogin }) {
 
     setError("");
 
-    // Check password confirmation
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    // Check password length
     if (password.length < 6) {
       setError(
         "Password must be at least 6 characters."
@@ -54,7 +52,6 @@ function Register({ onRegister, goToLogin }) {
 
       const data = await response.json();
 
-      // Backend error
       if (!response.ok) {
         setError(
           data.message || "Registration failed."
@@ -63,20 +60,17 @@ function Register({ onRegister, goToLogin }) {
       }
 
 
-      // Save JWT
       localStorage.setItem(
         "token",
         data.token
       );
 
-      // Save safe user information
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
 
-      // Open dashboard
       onRegister(data.user);
 
     } catch (error) {
@@ -101,7 +95,6 @@ function Register({ onRegister, goToLogin }) {
 
       <div className="auth-container">
 
-        {/* LEFT SIDE */}
 
         <div className="auth-left">
 
@@ -132,7 +125,6 @@ function Register({ onRegister, goToLogin }) {
         </div>
 
 
-        {/* RIGHT SIDE */}
 
         <div className="auth-right">
 
@@ -147,7 +139,6 @@ function Register({ onRegister, goToLogin }) {
             </p>
 
 
-            {/* ERROR */}
 
             {error && (
               <div className="auth-error">
@@ -156,7 +147,6 @@ function Register({ onRegister, goToLogin }) {
             )}
 
 
-            {/* REGISTER FORM */}
 
             <form onSubmit={handleRegister}>
 
@@ -237,7 +227,6 @@ function Register({ onRegister, goToLogin }) {
             </form>
 
 
-            {/* LOGIN LINK */}
 
             <p className="switch-auth">
 
