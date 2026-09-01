@@ -19,7 +19,7 @@ import "./App.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// Get saved user safely
+
 const getStoredUser = () => {
   try {
 
@@ -44,15 +44,12 @@ const getStoredUser = () => {
 };
 
 
-// Get current browser path
 const getPath = () => {
   return window.location.pathname || "/";
 };
 
 
-// ========================================
-// DASHBOARD
-// ========================================
+
 
 function Dashboard({
   user,
@@ -65,7 +62,6 @@ function Dashboard({
   );
 
 
-  // Listen for browser Back/Forward
   useEffect(() => {
 
     const handlePopState = () => {
@@ -89,7 +85,6 @@ function Dashboard({
   }, []);
 
 
-  // Navigate without reloading page
   const navigate = (nextPath) => {
 
     window.history.pushState(
@@ -167,10 +162,6 @@ function Dashboard({
 }
 
 
-// ========================================
-// MAIN APP
-// ========================================
-
 function App() {
 
   const [page, setPage] = useState(() => {
@@ -197,9 +188,6 @@ function App() {
     );
 
 
-  // ======================================
-  // CHECK EXISTING LOGIN SESSION
-  // ======================================
 
   useEffect(() => {
 
@@ -290,9 +278,6 @@ function App() {
   }, []);
 
 
-  // ======================================
-  // LOGIN / REGISTER SUCCESS
-  // ======================================
 
   const handleAuthSuccess = (
     loggedInUser
@@ -311,9 +296,6 @@ function App() {
   };
 
 
-  // ======================================
-  // LOGOUT
-  // ======================================
 
   const handleLogout = () => {
 
@@ -339,9 +321,6 @@ function App() {
   };
 
 
-  // ======================================
-  // LOADING SESSION
-  // ======================================
 
   if (loadingUser) {
 
@@ -355,9 +334,7 @@ function App() {
   }
 
 
-  // ======================================
-  // LOGIN
-  // ======================================
+
 
   if (page === "login") {
 
@@ -372,10 +349,7 @@ function App() {
   }
 
 
-  // ======================================
-  // REGISTER
-  // ======================================
-
+  
   if (page === "register") {
 
     return (
@@ -395,9 +369,7 @@ function App() {
   }
 
 
-  // ======================================
-  // DASHBOARD
-  // ======================================
+  
 
   return (
     <Dashboard
