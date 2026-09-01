@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
 
-// ========================================
-// ASSIGNMENT SCHEMA
-// ========================================
 
 const assignmentSchema = new mongoose.Schema(
   {
@@ -17,7 +14,6 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Assignment title
     title: {
       type: String,
       required: true,
@@ -25,7 +21,6 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Subject name
     subject: {
       type: String,
       required: true,
@@ -33,7 +28,6 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Optional topic
     topic: {
       type: String,
       default: "",
@@ -41,14 +35,12 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Due date
     dueDate: {
       type: String,
       required: true
     },
 
 
-    // Priority
     priority: {
       type: String,
       enum: [
@@ -60,7 +52,6 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Description/details
     description: {
       type: String,
       default: "",
@@ -68,7 +59,6 @@ const assignmentSchema = new mongoose.Schema(
     },
 
 
-    // Completion status
     completed: {
       type: Boolean,
       default: false
