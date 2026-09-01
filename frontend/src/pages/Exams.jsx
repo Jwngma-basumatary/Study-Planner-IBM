@@ -158,9 +158,6 @@ function Exams() {
   const [now, setNow] =
     useState(Date.now());
 
-  // ========================================
-  // API
-  // ========================================
 
   const apiRequest = async (
     endpoint,
@@ -223,9 +220,6 @@ function Exams() {
     return data;
   };
 
-  // ========================================
-  // LOAD EXAMS
-  // ========================================
 
   const loadExams = async () => {
     try {
@@ -263,10 +257,7 @@ function Exams() {
     loadExams();
   }, []);
 
-  // ========================================
-  // COUNTDOWN REFRESH
-  // ========================================
-
+  
   useEffect(() => {
     const timer =
       setInterval(() => {
@@ -277,9 +268,7 @@ function Exams() {
       clearInterval(timer);
   }, []);
 
-  // ========================================
-  // UPCOMING EXAMS
-  // ========================================
+
 
   const upcomingExams =
     useMemo(() => {
@@ -305,9 +294,6 @@ function Exams() {
   const nextExam =
     upcomingExams[0] || null;
 
-  // ========================================
-  // STATS
-  // ========================================
 
   const readyCount =
     exams.filter(
@@ -328,9 +314,7 @@ function Exams() {
       now
     );
 
-  // ========================================
-  // FORM
-  // ========================================
+
 
   const openAddForm = () => {
     setEditingId(null);
@@ -404,9 +388,7 @@ function Exams() {
     );
   };
 
-  // ========================================
-  // CREATE / UPDATE
-  // ========================================
+
 
   const handleSubmit = async (
     event
@@ -517,9 +499,7 @@ function Exams() {
     }
   };
 
-  // ========================================
-  // DELETE
-  // ========================================
+  
 
   const deleteExam = async (
     id
@@ -567,10 +547,7 @@ function Exams() {
     }
   };
 
-  // ========================================
-  // STATUS
-  // ========================================
-
+  
   const updateStatus = async (
     exam,
     status
@@ -609,10 +586,7 @@ function Exams() {
     }
   };
 
-  // ========================================
-  // LOADING
-  // ========================================
-
+  
   if (loading) {
     return (
       <div className="exams-page">
@@ -623,9 +597,7 @@ function Exams() {
     );
   }
 
-  // ========================================
-  // RENDER
-  // ========================================
+  
 
   return (
     <div className="exams-page">
@@ -656,7 +628,6 @@ function Exams() {
       </header>
 
 
-      {/* MESSAGES */}
 
       {error && (
         <div className="exam-error">
@@ -671,7 +642,6 @@ function Exams() {
       )}
 
 
-      {/* ADD / EDIT FORM */}
 
       {showForm && (
         <section className="exam-form-card">
@@ -841,7 +811,6 @@ function Exams() {
       )}
 
 
-      {/* NEXT EXAM */}
 
       {nextExam && countdown && (
         <section className="exam-countdown-card">
@@ -916,7 +885,6 @@ function Exams() {
       )}
 
 
-      {/* STATISTICS */}
 
       <section className="exam-stats">
 
@@ -954,8 +922,6 @@ function Exams() {
 
       </section>
 
-
-      {/* EXAMS */}
 
       <section className="exam-list">
 
@@ -1035,7 +1001,6 @@ function Exams() {
                   key={exam._id}
                 >
 
-                  {/* DATE */}
 
                   <div className="exam-date-box">
 
@@ -1050,7 +1015,6 @@ function Exams() {
                   </div>
 
 
-                  {/* DETAILS */}
 
                   <div className="exam-details">
 
@@ -1101,7 +1065,6 @@ function Exams() {
                   </div>
 
 
-                  {/* ACTIONS */}
 
                   <div className="exam-actions">
 
