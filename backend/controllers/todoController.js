@@ -3,9 +3,6 @@ const mongoose = require("mongoose");
 const Todo = require("../models/Todo");
 
 
-// ========================================
-// CHECK OBJECT ID
-// ========================================
 
 const isValidId = (id) => {
 
@@ -14,10 +11,6 @@ const isValidId = (id) => {
 };
 
 
-// ========================================
-// GET TODOS
-// GET /api/todos
-// ========================================
 
 const getTodos = async (req, res) => {
 
@@ -54,10 +47,6 @@ const getTodos = async (req, res) => {
 };
 
 
-// ========================================
-// CREATE TODO
-// POST /api/todos
-// ========================================
 
 const createTodo = async (req, res) => {
 
@@ -120,10 +109,6 @@ const createTodo = async (req, res) => {
 };
 
 
-// ========================================
-// UPDATE TODO
-// PUT /api/todos/:id
-// ========================================
 
 const updateTodo = async (req, res) => {
 
@@ -212,10 +197,6 @@ const updateTodo = async (req, res) => {
 };
 
 
-// ========================================
-// DELETE TODO
-// DELETE /api/todos/:id
-// ========================================
 
 const deleteTodo = async (req, res) => {
 
@@ -281,10 +262,6 @@ const deleteTodo = async (req, res) => {
 };
 
 
-// ========================================
-// TOGGLE TODO
-// PATCH /api/todos/:id/toggle
-// ========================================
 
 const toggleTodo = async (req, res) => {
 
