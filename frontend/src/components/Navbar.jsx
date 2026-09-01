@@ -60,10 +60,7 @@ function Navbar({
 
     <aside className="sidebar">
 
-      {/* ==================================
-          USER PROFILE
-      ================================== */}
-
+      
       <div className="profile">
 
         {user?.profileImage ? (
@@ -98,9 +95,7 @@ function Navbar({
       </div>
 
 
-      {/* ==================================
-          NAVIGATION
-      ================================== */}
+
 
       <nav className="side-nav">
 
@@ -144,9 +139,7 @@ function Navbar({
         )}
 
 
-        {/* ==================================
-            ACCOUNT
-        ================================== */}
+        
 
         <p className="nav-title bottom-title">
           ACCOUNT
@@ -177,9 +170,7 @@ function Navbar({
         </a>
 
 
-        {/* ==================================
-            DARK MODE
-        ================================== */}
+        
 
         <button
           type="button"
@@ -200,9 +191,7 @@ function Navbar({
         </button>
 
 
-        {/* ==================================
-            LOGOUT
-        ================================== */}
+       
 
         <button
           type="button"
