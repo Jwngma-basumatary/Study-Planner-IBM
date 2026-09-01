@@ -4,10 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function Courses() {
 
-  // ========================================
-  // STATE
-  // ========================================
-
+  
   const [subjects, setSubjects] =
     useState([]);
 
@@ -21,7 +18,6 @@ function Courses() {
     useState("");
 
 
-  // Subject form
   const [showSubjectForm, setShowSubjectForm] =
     useState(false);
 
@@ -35,7 +31,6 @@ function Courses() {
     useState("");
 
 
-  // Chapter form
   const [chapterForm, setChapterForm] =
     useState(null);
 
@@ -49,14 +44,11 @@ function Courses() {
     useState("");
 
 
-  // Expanded subjects
   const [expandedSubjectId, setExpandedSubjectId] =
     useState(null);
 
 
-  // ========================================
-  // GET TOKEN
-  // ========================================
+  
 
   const getToken = () => {
 
@@ -64,9 +56,7 @@ function Courses() {
   };
 
 
-  // ========================================
-  // API REQUEST HELPER
-  // ========================================
+  
 
   const apiRequest = async (
     url,
@@ -137,9 +127,7 @@ function Courses() {
   };
 
 
-  // ========================================
-  // LOAD SUBJECTS
-  // ========================================
+  
 
   const loadSubjects = async () => {
 
@@ -186,9 +174,6 @@ function Courses() {
   }, []);
 
 
-  // ========================================
-  // CLEAR MESSAGES
-  // ========================================
 
   const showSuccessMessage = (
     message
@@ -202,9 +187,6 @@ function Courses() {
   };
 
 
-  // ========================================
-  // OPEN ADD SUBJECT
-  // ========================================
 
   const openAddSubject = () => {
 
@@ -220,9 +202,7 @@ function Courses() {
   };
 
 
-  // ========================================
-  // OPEN EDIT SUBJECT
-  // ========================================
+  
 
   const openEditSubject = (
     subject
@@ -246,10 +226,6 @@ function Courses() {
   };
 
 
-  // ========================================
-  // CLOSE SUBJECT FORM
-  // ========================================
-
   const closeSubjectForm = () => {
 
     setShowSubjectForm(false);
@@ -261,10 +237,6 @@ function Courses() {
     setSubjectDescription("");
   };
 
-
-  // ========================================
-  // SAVE SUBJECT
-  // ========================================
 
   const handleSubjectSubmit = async (
     event
@@ -367,10 +339,7 @@ function Courses() {
   };
 
 
-  // ========================================
-  // DELETE SUBJECT
-  // ========================================
-
+  
   const handleDeleteSubject = async (
     subject
   ) => {
@@ -436,10 +405,7 @@ function Courses() {
   };
 
 
-  // ========================================
-  // OPEN ADD CHAPTER
-  // ========================================
-
+  
   const openAddChapter = (
     subjectId
   ) => {
@@ -455,10 +421,6 @@ function Courses() {
     setError("");
   };
 
-
-  // ========================================
-  // OPEN EDIT CHAPTER
-  // ========================================
 
   const openEditChapter = (
     subjectId,
@@ -482,11 +444,6 @@ function Courses() {
     setError("");
   };
 
-
-  // ========================================
-  // CLOSE CHAPTER FORM
-  // ========================================
-
   const closeChapterForm = () => {
 
     setChapterForm(null);
@@ -497,11 +454,6 @@ function Courses() {
 
     setChapterDescription("");
   };
-
-
-  // ========================================
-  // SAVE CHAPTER
-  // ========================================
 
   const handleChapterSubmit = async (
     event
@@ -557,8 +509,6 @@ function Courses() {
         );
 
 
-      // Replace the subject returned
-      // from MongoDB.
       setSubjects(
         (currentSubjects) =>
           currentSubjects.map(
@@ -595,9 +545,6 @@ function Courses() {
   };
 
 
-  // ========================================
-  // DELETE CHAPTER
-  // ========================================
 
   const handleDeleteChapter = async (
     subjectId,
@@ -659,10 +606,6 @@ function Courses() {
   };
 
 
-  // ========================================
-  // TOGGLE CHAPTER
-  // ========================================
-
   const handleToggleChapter = async (
     subjectId,
     chapterId
@@ -706,11 +649,6 @@ function Courses() {
     }
   };
 
-
-  // ========================================
-  // TOGGLE SUBJECT DETAILS
-  // ========================================
-
   const toggleSubjectDetails = (
     subjectId
   ) => {
@@ -723,10 +661,6 @@ function Courses() {
     );
   };
 
-
-  // ========================================
-  // LOADING
-  // ========================================
 
   if (loading) {
 
@@ -762,19 +696,12 @@ function Courses() {
     );
   }
 
-
-  // ========================================
-  // PAGE
-  // ========================================
-
   return (
 
     <section className="courses-page">
 
 
-      {/* ====================================
-          HEADER
-      ==================================== */}
+      
 
       <div className="courses-header">
 
@@ -806,10 +733,7 @@ function Courses() {
       </div>
 
 
-      {/* ====================================
-          MESSAGES
-      ==================================== */}
-
+      
       {error && (
 
         <div className="courses-error">
@@ -828,9 +752,7 @@ function Courses() {
       )}
 
 
-      {/* ====================================
-          SUBJECT FORM
-      ==================================== */}
+      
 
       {showSubjectForm && (
 
@@ -921,9 +843,7 @@ function Courses() {
       )}
 
 
-      {/* ====================================
-          EMPTY STATE
-      ==================================== */}
+     
 
       {subjects.length === 0 && (
 
@@ -955,9 +875,7 @@ function Courses() {
       )}
 
 
-      {/* ====================================
-          SUBJECT CARDS
-      ==================================== */}
+      
 
       {subjects.length > 0 && (
 
@@ -1002,9 +920,7 @@ function Courses() {
                   key={subject._id}
                 >
 
-                  {/* ======================
-                      SUBJECT HEADER
-                  ====================== */}
+                  
 
                   <div className="subject-card-top">
 
@@ -1055,9 +971,7 @@ function Courses() {
                   </div>
 
 
-                  {/* ======================
-                      DESCRIPTION
-                  ====================== */}
+                  
 
                   {subject.description && (
 
@@ -1068,9 +982,7 @@ function Courses() {
                   )}
 
 
-                  {/* ======================
-                      PROGRESS
-                  ====================== */}
+                 
 
                   <div className="subject-progress-header">
 
@@ -1107,9 +1019,6 @@ function Courses() {
                   </p>
 
 
-                  {/* ======================
-                      VIEW BUTTON
-                  ====================== */}
 
                   <button
                     type="button"
@@ -1134,9 +1043,7 @@ function Courses() {
                   </button>
 
 
-                  {/* ======================
-                      CHAPTER DETAILS
-                  ====================== */}
+                  
 
                   {isExpanded && (
 
@@ -1163,7 +1070,6 @@ function Courses() {
                       </div>
 
 
-                      {/* CHAPTER FORM */}
 
                       {chapterForm ===
                         subject._id && (
@@ -1250,7 +1156,6 @@ function Courses() {
                       )}
 
 
-                      {/* CHAPTER LIST */}
 
                       {totalChapters === 0 ? (
 
